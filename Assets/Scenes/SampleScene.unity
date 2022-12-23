@@ -776,6 +776,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetX: 0
   offsetY: 0
+  areaWidth: 750
+  buttonHeight: 60
+  fontSize: 42
 --- !u!114 &1168838676
 MonoBehaviour:
   m_ObjectHideFlags: 0
