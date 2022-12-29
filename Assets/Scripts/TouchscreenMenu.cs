@@ -2,19 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour
+public class TouchscreenMenu : MonoBehaviour
 {
     private bool button1IsPressed = false;
-
-    public void startExperiment()
-    {
-        Debug.Log("Start");
-    }
-
-    public void BlueToothConnect()
-    {
-        Debug.Log("Connect");
-    }
 
     public void PressButton1()
     {

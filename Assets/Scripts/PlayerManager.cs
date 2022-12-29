@@ -6,20 +6,20 @@ using Mirror;
 
 public class PlayerManager : NetworkBehaviour
 {
-    MainMenu ExperimentMenuScriptComponent;
+    TouchscreenMenu TouchscreenScriptComponent;
     Text PseudoConsole;
 
     // Start is called before the first frame update
     void Start()
     {
-        ExperimentMenuScriptComponent = GameObject.Find("ExperimentMenu").GetComponent<MainMenu>();
+        TouchscreenScriptComponent = GameObject.Find("TouchscreenMenu").GetComponent<TouchscreenMenu>();
         PseudoConsole = GameObject.Find("PseudoConsole").GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ExperimentMenuScriptComponent.getButton1IsPressed())
+        if (TouchscreenScriptComponent.getButton1IsPressed())
         {
             print("We pressed a button");
             CmdYoyo();
