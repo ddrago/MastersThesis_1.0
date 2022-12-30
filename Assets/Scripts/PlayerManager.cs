@@ -30,7 +30,6 @@ public class PlayerManager : NetworkBehaviour
     void CmdYoyo()
     {
         Debug.Log("A client Pressed a button!");
-        Debug.Log(PseudoConsole.ToString());
         PseudoConsole.text = "TADA!";
     }
 }

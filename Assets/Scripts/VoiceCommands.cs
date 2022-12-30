@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
@@ -12,20 +12,20 @@ public class VoiceCommands : MonoBehaviour
 
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
+    Text PseudoConsole;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        PseudoConsole = GameObject.Find("PseudoConsole").GetComponent<Text>();
+
         Debug.Log("Hello");
 
-        actions.Add("forward", Forward);
-        actions.Add("up", Up);
-        actions.Add("down", Down);
-        actions.Add("back", Back);
-        actions.Add("music", Music);
-        actions.Add("news", News);
-        actions.Add("podcasts", Podcasts);
-        actions.Add("sport", Sport);
+        actions.Add("music", Gotit);
+        actions.Add("news", Gotit);
+        actions.Add("podcasts", Gotit);
+        actions.Add("sport", Gotit);
         actions.Add("weather", Gotit);
         actions.Add("terrains", Gotit);
         actions.Add("performance", Gotit);
@@ -49,52 +49,18 @@ public class VoiceCommands : MonoBehaviour
 
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
     {
+        if (!this.gameObject.activeSelf)
+        {
+            Debug.Log("Voice commands not active!");
+            return;
+        } 
         Debug.Log(phrase.text);
         actions[phrase.text].Invoke();
+        PseudoConsole.text = phrase.text;
     }
 
     private void Gotit()
     {
-        Debug.Log("---");
-    }
-
-    private void Forward()
-    {
-        transform.Translate(1, 0, 0);
-    }
-
-    private void Back()
-    {
-        transform.Translate(-1, 0, 0);
-    }
-
-    private void Up()
-    {
-        transform.Translate(0, 1, 0);
-    }
-
-    private void Down()
-    {
-        transform.Translate(0, -1, 0);
-    }
-
-    private void Music()
-    {
-        Debug.Log("Music");
-    }
-
-    private void News()
-    {
-        Debug.Log("News");
-    }
-
-    private void Podcasts()
-    {
-        Debug.Log("Podcasts");
-    }
-
-    private void Sport()
-    {
-        Debug.Log("Sport");
+        Debug.Log("Got it!");
     }
 }
