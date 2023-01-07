@@ -1,0 +1,137 @@
+{
+    "name": "BluetoothButtonControls",
+    "maps": [
+        {
+            "name": "BluetoothButtonControls",
+            "id": "40fd0fb8-d372-49fb-82a0-33a0b5183659",
+            "actions": [
+                {
+                    "name": "Mouse",
+                    "type": "Button",
+                    "id": "d453d78f-d575-4a4b-8373-04727c200962",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Pen",
+                    "type": "Button",
+                    "id": "5bd45d20-1c91-4458-a39f-c3c3e3e8d3c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "4ae02e2c-0479-47a7-8dee-d7899e0e50f4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "caf2df3b-b3b9-49a8-9bd3-043ea718f65c",
+                    "path": "<Mouse>/backButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8482cb49-8e07-4aa6-870c-2ea161950655",
+                    "path": "<Mouse>/forwardButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e7d57dd-9cee-48b1-bbb6-adb89fce562c",
+                    "path": "<Pen>/barrel1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "965f7466-5f83-449a-8173-c02ffca75178",
+                    "path": "<Pen>/barrel2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c2ec80e-3c65-4cc0-9ab8-ba6aa927a55d",
+                    "path": "<Pen>/barrel3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95506413-55d4-48ea-9741-c4a916116c3b",
+                    "path": "<Pen>/barrel4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45807c4e-cfaf-41b3-a674-e7d948f918ca",
+                    "path": "<Pen>/eraser",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68c45395-e78e-4a8b-bfe3-51d33a3b5b23",
+                    "path": "<Pen>/tip",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8affc88-a94a-4092-be15-161745d62d97",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -154,6 +154,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DiegoDrago.PhoneMenu_MastersProject_0_1
+    Standalone: com.DiegoDrago.PhoneMenuMastersProject01
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -725,8 +726,16 @@ PlayerSettings:
   metroTileBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21568628, a: 0}
   metroSplashScreenBackgroundColor: {r: 0.12941177, g: 0.17254902, b: 0.21568628, a: 1}
   metroSplashScreenUseBackgroundColor: 0
-  platformCapabilities: {}
-  metroTargetDeviceFamilies: {}
+  platformCapabilities:
+    WindowsStoreApps:
+      Bluetooth: True
+  metroTargetDeviceFamilies:
+    Holographic: True
+    IoT: True
+    IoTHeadless: True
+    Mobile: True
+    Team: True
+    Xbox: True
   metroFTAName: 
   metroFTAFileTypes: []
   metroProtocolName: 
@@ -772,7 +781,7 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 1
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []

@@ -20,7 +20,7 @@ public class VoiceCommands : MonoBehaviour
     {
         PseudoConsole = GameObject.Find("PseudoConsole").GetComponent<Text>();
 
-        Debug.Log("Hello");
+        Debug.Log("Ready to receive voice commands!");
 
         actions.Add("music", Gotit);
         actions.Add("news", Gotit);
