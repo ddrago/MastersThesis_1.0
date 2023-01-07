@@ -18,8 +18,8 @@ using UnityEngine.InputSystem.Utilities;
         byte Button1 : 1;     // #1 bit #0
         byte Button2 : 1;     // #1 bit #1
         byte Button3 : 1;     // #1 bit #2
-        byte Button4 : 1;     // #1 bit #3
-        byte Button5 : 1;     // #1 bit #4
+        byte westButton : 1;     // #1 bit #3
+        byte eastButton : 1;     // #1 bit #4
     }
  */
 [StructLayout(LayoutKind.Explicit)]
@@ -37,12 +37,12 @@ public struct ControllerDeviceState : IInputStateTypeInfo
     [InputControl(name = "button1", layout = "Button", bit = 0)]
     [InputControl(name = "button2", layout = "Button", bit = 1)]
     [InputControl(name = "button3", layout = "Button", bit = 2)]
-    [InputControl(name = "WestButton", layout = "Button", bit = 3)]
-    [InputControl(name = "EastButton", layout = "Button", bit = 4)]
+    [InputControl(name = "westButton", displayName = "prevTrack", layout = "Button", bit = 3)]
+    [InputControl(name = "eastButton", displayName = "nextTrack", layout = "Button", bit = 4)]
     [InputControl(name = "button6", layout = "Button", bit = 5)]
-    [InputControl(name = "MidButton", layout = "Button", bit = 6)]
-    [InputControl(name = "NorthButton", layout = "Button", bit = 7)]
-    [InputControl(name = "SouthButton", layout = "Button", bit = 8)]
+    [InputControl(name = "midButton", displayName = "playPause", layout = "Button", bit = 6)]
+    [InputControl(name = "northButton", displayName = "volumeUp", layout = "Button", bit = 7)]
+    [InputControl(name = "southButton", displayName = "volumeDown", layout = "Button", bit = 8)]
     [FieldOffset(2)] public int buttons;
 }
 
@@ -53,21 +53,22 @@ public class ControllerDevice : InputDevice
     public ButtonControl button1 { get; private set; }
     public ButtonControl button2 { get; private set; }
     public ButtonControl button3 { get; private set; }
-    public ButtonControl WestButton { get; private set; }  //PREVIOUS TRACK
-    public ButtonControl EastButton { get; private set; }  //NEXT TRACK
+    public ButtonControl westButton { get; private set; }  //PREVIOUS TRACK
+    public ButtonControl eastButton { get; private set; }  //NEXT TRACK
     public ButtonControl button6 { get; private set; }  
-    public ButtonControl MidButton { get; private set; }  //PLAY/PAUSE
-    public ButtonControl NorthButton { get; private set; }  //VOLUME UP
-    public ButtonControl SouthButton9 { get; private set; }  //VOLUME DOWN
+    public ButtonControl midButton { get; private set; }  //PLAY/PAUSE
+    public ButtonControl northButton { get; private set; }  //VOLUME UP
+    public ButtonControl southButton { get; private set; }  //VOLUME DOWN
 
     protected override void FinishSetup()
     {
         base.FinishSetup();
 
-        button1 = GetChildControl<ButtonControl>("button1");
-        button2 = GetChildControl<ButtonControl>("button2");
-        button3 = GetChildControl<ButtonControl>("button3");
-        button4 = GetChildControl<ButtonControl>("button4");
+        westButton = GetChildControl<ButtonControl>("westButton");
+        eastButton = GetChildControl<ButtonControl>("eastButton");
+        midButton = GetChildControl<ButtonControl>("midButton");
+        northButton = GetChildControl<ButtonControl>("northButton");
+        southButton = GetChildControl<ButtonControl>("southButton");
     }
 
     static ControllerDevice()
