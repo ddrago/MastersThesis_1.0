@@ -11,17 +11,6 @@ using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Utilities;
 
-/*
- This struct can be described as such: 
-    {
-        byte reportId;        // #0
-        byte Button1 : 1;     // #1 bit #0
-        byte Button2 : 1;     // #1 bit #1
-        byte Button3 : 1;     // #1 bit #2
-        byte westButton : 1;     // #1 bit #3
-        byte eastButton : 1;     // #1 bit #4
-    }
- */
 [StructLayout(LayoutKind.Explicit)]
 public struct ControllerDeviceState : IInputStateTypeInfo
 {
@@ -76,8 +65,9 @@ public class ControllerDevice : InputDevice
         InputSystem.RegisterLayout<ControllerDevice>(
                 matches: new InputDeviceMatcher()
                 .WithInterface("HID")
-                .WithCapability("vendorId", 0x2652) // Iton Corp.
-                .WithCapability("productId", 0x17666) // Broadcom Bluetooth Wireless Keyboard.
+                .WithManufacturer("Iton Corp.      ")
+                //.WithCapability("vendorId", 0x2652) // Iton Corp.
+                //.WithCapability("productId", 0x17666) // Broadcom Bluetooth Wireless Keyboard.
         );
 
         if (!InputSystem.devices.Any(x => x is ControllerDevice))
