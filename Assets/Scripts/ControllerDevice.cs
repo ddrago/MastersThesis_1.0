@@ -66,6 +66,7 @@ public class ControllerDevice : InputDevice
                 matches: new InputDeviceMatcher()
                 .WithInterface("HID")
                 .WithManufacturer("Iton Corp.      ")
+                .WithCapability("inputReportSize", 4)
                 //.WithCapability("vendorId", 0x2652) // Iton Corp.
                 //.WithCapability("productId", 0x17666) // Broadcom Bluetooth Wireless Keyboard.
         );
