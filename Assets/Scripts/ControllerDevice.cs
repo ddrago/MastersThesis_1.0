@@ -36,7 +36,9 @@ public struct ControllerDeviceState : IInputStateTypeInfo
 }
 
 [InputControlLayout(stateType = typeof(ControllerDeviceState))]
+#if UNITY_EDITOR
 [InitializeOnLoad]
+#endif
 public class ControllerDevice : InputDevice
 {
     public ButtonControl button1 { get; private set; }
@@ -66,9 +68,7 @@ public class ControllerDevice : InputDevice
                 matches: new InputDeviceMatcher()
                 .WithInterface("HID")
                 .WithManufacturer("Iton Corp.      ")
-                .WithCapability("inputReportSize", 4)
-                //.WithCapability("vendorId", 0x2652) // Iton Corp.
-                //.WithCapability("productId", 0x17666) // Broadcom Bluetooth Wireless Keyboard.
+                //.WithCapability("inputReportSize", 4)
         );
 
         if (!InputSystem.devices.Any(x => x is ControllerDevice))
@@ -77,8 +77,5 @@ public class ControllerDevice : InputDevice
 
     [RuntimeInitializeOnLoadMethod]
     public static void Initialize()
-    {
-
-
-    }
+    {}
 }

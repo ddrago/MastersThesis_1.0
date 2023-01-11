@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Bluetooth : MonoBehaviour
 {
+    ControllerDevice controller;
+    //bool flag1 = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,27 +19,29 @@ public class Bluetooth : MonoBehaviour
     {
         if (this.gameObject.activeSelf)
         {
-            if(Keyboard.current.spaceKey.wasPressedThisFrame){
-                Debug.Log(Gamepad.all.Count);
-                //Debug.Log("---");
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                
                 for (int i = 0; i < InputSystem.devices.Count; i++)
                 {
-                    Debug.Log(InputSystem.devices[i]);
+                    //Debug.Log(InputSystem.devices[i].name);
+                    if (InputSystem.devices[i].name == "ControllerDevice1")
+                    {
+                        controller = (ControllerDevice)InputSystem.devices[i];
+                    }
                 }
-                Debug.Log("END\n\n");
-            }
+                Debug.Log(controller.enabled);
 
-            if (Mouse.current.backButton.wasPressedThisFrame)
-            {
-                Debug.Log("Mouse back");
-            }
-
-            if (Mouse.current.forwardButton.wasPressedThisFrame)
-            {
-                Debug.Log("Mouse forward");
             }
         }
-
+        else if (this.gameObject.activeSelf && controller != null)
+        {
+            Debug.Log("Ok it gets here");
+            if (controller.midButton.isPressed)
+            {
+                Debug.Log("We did it bois");
+            }
+        }
     }
 }
 

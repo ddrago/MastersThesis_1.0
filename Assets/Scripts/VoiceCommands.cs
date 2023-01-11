@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
+
+#if UNITY_STANDALONE_WIN
+    using UnityEngine.Windows.Speech;
+#endif
 
 public class VoiceCommands : MonoBehaviour
 {
+    #if UNITY_STANDALONE_WIN
+        private KeywordRecognizer keywordRecognizer;
+    #endif
 
-    private KeywordRecognizer keywordRecognizer;
 
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
@@ -35,10 +40,12 @@ public class VoiceCommands : MonoBehaviour
         actions.Add("contacts", Gotit);
         actions.Add("calls", Gotit);
 
+        #if UNITY_STANDALONE_WIN
+            keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
+            keywordRecognizer.OnPhraseRecognized += recognizedPhrase;
+            keywordRecognizer.Start();
+        #endif
 
-        keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
-        keywordRecognizer.OnPhraseRecognized += recognizedPhrase;
-        keywordRecognizer.Start();
     }
 
     // Update is called once per frame
@@ -47,6 +54,7 @@ public class VoiceCommands : MonoBehaviour
 
     }
 
+    #if UNITY_STANDALONE_WIN
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
     {
         if (!this.gameObject.activeSelf)
@@ -58,6 +66,7 @@ public class VoiceCommands : MonoBehaviour
         actions[phrase.text].Invoke();
         PseudoConsole.text = phrase.text;
     }
+    #endif
 
     private void Gotit()
     {
