@@ -1795,9 +1795,89 @@ MonoBehaviour:
   m_GameObject: {fileID: 750054803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2959d3ff19d92e3429410266d993bf75, type: 3}
+  m_Script: {fileID: 11500000, guid: f9071152e4fa14f44a0c2ce8cc436c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mid:
+    m_Name: Mid
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a0806200-2186-4649-aac1-7c6c4729d771
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c14eeb60-c22f-4ffb-8c2e-fffb1416f459
+      m_Path: <Gamepad>/midButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Mid
+      m_Flags: 0
+  up:
+    m_Name: Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7d667588-6b95-4d3f-935d-889bb41be818
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d60933c8-e4b9-4aa6-8742-5df52152d74b
+      m_Path: <Gamepad>/northButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Up
+      m_Flags: 0
+  down:
+    m_Name: Down
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 119f005e-df0c-48fc-9e46-af187232728a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1c0cb67b-0846-4c25-9044-4db756473f44
+      m_Path: <Gamepad>/southButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Down
+      m_Flags: 0
+  right:
+    m_Name: Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c998b726-1bdd-4425-84c2-5e0a03d8fd69
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 14c81cba-af0a-41dd-9a0f-5bf7276acb51
+      m_Path: <Gamepad>/eastButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Right
+      m_Flags: 0
+  left:
+    m_Name: Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cb3dc9d3-6948-43d8-8ad6-16887fc7f4aa
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 274ee6c4-f86d-4d9b-80d6-81a430039ac0
+      m_Path: <Gamepad>/westButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Left
+      m_Flags: 0
 --- !u!1 &779811280
 GameObject:
   m_ObjectHideFlags: 0
