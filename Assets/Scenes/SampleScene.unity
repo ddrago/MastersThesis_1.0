@@ -1878,6 +1878,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Left
       m_Flags: 0
+  logsManager: {fileID: 1149382493}
 --- !u!1 &779811280
 GameObject:
   m_ObjectHideFlags: 0

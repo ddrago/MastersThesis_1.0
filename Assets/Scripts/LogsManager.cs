@@ -9,7 +9,7 @@ public class LogsManager : MonoBehaviour
 
     //The name of the logging files - MODIFY FOR EACH PARTICIPANT
     private readonly string baseFileName = "log.csv";
-    private static string filename;
+    private string filename;
     private readonly string baseTiltPathFilename = "gazepath.csv";
     private string tiltPathFilename;
 
@@ -46,7 +46,7 @@ public class LogsManager : MonoBehaviour
         });
     }
 
-    public static void LogOnCSV(string interactionType, string item, string itemToSelect, bool isCorrectItem)
+    public void LogOnCSV(string interactionType, string item, string itemToSelect, bool isCorrectItem)
     {
         System.IO.File.AppendAllLines(filename, new string[] {
             interactionType + "," + DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + item + "," + itemToSelect + "," + isCorrectItem

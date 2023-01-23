@@ -12,6 +12,9 @@ public class ControllerManager : MonoBehaviour
     public InputAction right;
     public InputAction left;
 
+    [Header("Utilities")]
+    public LogsManager logsManager;
+
     void OnEnable()
     {
         mid.Enable();
@@ -52,9 +55,12 @@ public class ControllerManager : MonoBehaviour
 
     }
 
+    // NB: the 'buttonName' parameter is only temporary, it will be the proper item name 
+    // Which I haven't chosen yet
     void controlsButtonPress(string buttonName)
     {
         Debug.Log(buttonName + " Pressed!");
+        logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
     }
 
 }
