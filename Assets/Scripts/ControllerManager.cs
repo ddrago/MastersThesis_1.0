@@ -32,11 +32,11 @@ public class ControllerManager : MonoBehaviour
 
     private void Awake()
     {
-        mid.performed += context => Debug.Log("Mid Pressed!");
-        up.performed += context => Debug.Log("North Pressed!");
-        down.performed += context => Debug.Log("South Pressed!");
-        right.performed += context => Debug.Log("East Pressed!");
-        left.performed += context => Debug.Log("West Pressed!");
+        mid.performed += context => controlsButtonPress("Mid");
+        up.performed += context => controlsButtonPress("North");
+        down.performed += context => controlsButtonPress("South");
+        right.performed += context => controlsButtonPress("East");
+        left.performed += context => controlsButtonPress("West");
     }
 
 
@@ -49,6 +49,12 @@ public class ControllerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    void controlsButtonPress(string buttonName)
+    {
+        Debug.Log(buttonName + " Pressed!");
+    }
+
 }

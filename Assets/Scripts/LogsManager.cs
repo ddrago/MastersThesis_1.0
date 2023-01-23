@@ -8,9 +8,9 @@ public class LogsManager : MonoBehaviour
     public int participantNumber;
 
     //The name of the logging files - MODIFY FOR EACH PARTICIPANT
-    private  readonly string baseFileName = "log.csv";
-    private  string filename;
-    private  readonly string baseTiltPathFilename = "gazepath.csv";
+    private readonly string baseFileName = "log.csv";
+    private static string filename;
+    private readonly string baseTiltPathFilename = "gazepath.csv";
     private string tiltPathFilename;
 
     // Called before Start
@@ -39,8 +39,6 @@ public class LogsManager : MonoBehaviour
             "[START]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A"
         });
 
-        Debug.Log(Application.persistentDataPath);
-
         // Log the gaze path directional data
         tiltPathFilename = Application.persistentDataPath + "/" + participantNumber + "_" + baseTiltPathFilename;
         System.IO.File.WriteAllLines(tiltPathFilename, new string[] {
@@ -48,14 +46,16 @@ public class LogsManager : MonoBehaviour
         });
     }
 
-    public void LogOnCSV(string interactionType, string item, string itemToSelect, bool isCorrectItem)
+    public static void LogOnCSV(string interactionType, string item, string itemToSelect, bool isCorrectItem)
     {
         System.IO.File.AppendAllLines(filename, new string[] {
             interactionType + "," + DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + item + "," + itemToSelect + "," + isCorrectItem
         });
     }
 
-    public void LogGazePath()
+    // This method still needs to be figured out. Should the laptop measure tilt? 
+    // Should the android phone log it? Should an additional phone strapped to the frame?
+    public void LogTiltPath()
     {
         /*if (Physics.Raycast(_ray, out _hitInfo, 100))
         {
