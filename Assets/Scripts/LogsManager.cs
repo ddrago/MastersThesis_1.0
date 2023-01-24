@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LogsManager : MonoBehaviour
 {
+    [Header("Logging Utilities")]
     public int participantNumber;
 
     //The name of the logging files - MODIFY FOR EACH PARTICIPANT
@@ -12,6 +13,7 @@ public class LogsManager : MonoBehaviour
     private string filename;
     private readonly string baseTiltPathFilename = "gazepath.csv";
     private string tiltPathFilename;
+    private static string instruction_log_filename = "instructions.txt";
 
     // Called before Start
     private void Awake()
@@ -66,5 +68,26 @@ public class LogsManager : MonoBehaviour
         }*/
 
         
+    }
+
+    public void LogInstructions(List<string> instructions)
+    {
+        // TODO make a bit more indicative than just instructions.txt
+        //instruction_log_filename = currentInputMethod + "_" + "instructions.txt";
+        instruction_log_filename = "instructions.txt";
+
+        //update filename
+        instruction_log_filename = Application.persistentDataPath + "/" + instruction_log_filename;
+        Debug.Log(instruction_log_filename);
+
+        System.IO.FileInfo theSourceFile = new System.IO.FileInfo(instruction_log_filename);
+        System.IO.File.WriteAllText(instruction_log_filename, string.Join(",", instructions.ToArray()));
+        //Just a debug functionality to make sure the file exists
+        /*if (System.IO.File.Exists(instruction_log_filename))
+        {
+            System.IO.StreamReader reader = theSourceFile.OpenText();
+            string text = reader.ReadLine();
+            print(text);
+        }*/
     }
 }
