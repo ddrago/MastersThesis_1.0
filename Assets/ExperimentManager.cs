@@ -16,7 +16,7 @@ public class ExperimentManager : MonoBehaviour
     private void Awake()
     {
         // Test 
-        startCondition();
+        StartCondition();
     }
 
     // Start is called before the first frame update
@@ -31,13 +31,18 @@ public class ExperimentManager : MonoBehaviour
         
     }
 
-    public void startCondition()
+    public void StartCondition()
     {
         instructions = new List<string>(instructions_to_give);
+        // TODO: will need to multiplicate the instructions (2, 3 or 4 times?)
+
         instructions = instructions.OrderBy(a => rnd.Next()).ToList();
         //Debug.Log(string.Join(",", instructions.ToArray()));
+
+        // TODO: need to initialise it to something at some point
         next_instruction = null;
 
         logsManager.LogInstructions(instructions);
     }
+
 }
