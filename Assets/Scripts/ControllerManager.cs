@@ -35,11 +35,11 @@ public class ControllerManager : MonoBehaviour
 
     private void Awake()
     {
-        mid.performed += context => controlsButtonPress("Mid");
-        up.performed += context => controlsButtonPress("North");
-        down.performed += context => controlsButtonPress("South");
-        right.performed += context => controlsButtonPress("East");
-        left.performed += context => controlsButtonPress("West");
+        mid.performed += context => ControlsButtonPress("Mid");
+        up.performed += context => ControlsButtonPress("North");
+        down.performed += context => ControlsButtonPress("South");
+        right.performed += context => ControlsButtonPress("East");
+        left.performed += context => ControlsButtonPress("West");
     }
 
 
@@ -57,7 +57,7 @@ public class ControllerManager : MonoBehaviour
 
     // NB: the 'buttonName' parameter is only temporary, it will be the proper item name 
     // Which I haven't chosen yet
-    void controlsButtonPress(string buttonName)
+    void ControlsButtonPress(string buttonName)
     {
         Debug.Log(buttonName + " Pressed!");
         logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
