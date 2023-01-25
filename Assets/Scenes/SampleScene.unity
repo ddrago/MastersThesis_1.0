@@ -1350,16 +1350,16 @@ MonoBehaviour:
   OnActivate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 551181517}
-        m_TargetAssemblyTypeName: HandGesturePrint, Assembly-CSharp
-        m_MethodName: PrintActivateMessage
+      - m_Target: {fileID: 260627934}
+        m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
+        m_MethodName: SelectItem
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ONE
+          m_StringArgument: calls
           m_BoolArgument: 0
         m_CallState: 2
   OnDeactivate:
@@ -1402,16 +1402,16 @@ MonoBehaviour:
   OnActivate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 551181517}
-        m_TargetAssemblyTypeName: HandGesturePrint, Assembly-CSharp
-        m_MethodName: PrintActivateMessage
+      - m_Target: {fileID: 260627934}
+        m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
+        m_MethodName: SelectItem
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: TWO
+          m_StringArgument: maps
           m_BoolArgument: 0
         m_CallState: 2
   OnDeactivate:
@@ -1482,16 +1482,16 @@ MonoBehaviour:
   OnActivate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 551181517}
-        m_TargetAssemblyTypeName: HandGesturePrint, Assembly-CSharp
-        m_MethodName: PrintActivateMessage
+      - m_Target: {fileID: 260627934}
+        m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
+        m_MethodName: SelectItem
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: FOUR
+          m_StringArgument: music
           m_BoolArgument: 0
         m_CallState: 2
   OnDeactivate:
@@ -1506,6 +1506,46 @@ MonoBehaviour:
   Pinky: 0
   MinimumExtendedCount: 4
   MaximumExtendedCount: 4
+  ShowGizmos: 1
+--- !u!114 &551181521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551181511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98e641d160144e87a3d33fcdb893a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 551181517}
+        m_TargetAssemblyTypeName: HandGesturePrint, Assembly-CSharp
+        m_MethodName: PrintActivateMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: N/A
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  Period: 0.2
+  HandModel: {fileID: 551181513}
+  Thumb: 2
+  Index: 1
+  Middle: 1
+  Ring: 2
+  Pinky: 2
+  MinimumExtendedCount: 0
+  MaximumExtendedCount: 3
   ShowGizmos: 1
 --- !u!1 &569628730
 GameObject:

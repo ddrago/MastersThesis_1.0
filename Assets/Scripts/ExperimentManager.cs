@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class ExperimentManager : MonoBehaviour
 {
+    [Header("Experiment variables")]
+    public int instructionMultiplicationNumber = 3;
+
+    [Header("GameObject Elements")]
     public LogsManager logsManager;
     public Text instructionGiver;
     public GameObject StartConditionButton;
@@ -54,11 +58,10 @@ public class ExperimentManager : MonoBehaviour
 
         // TODO: will need to multiplicate the instructions (2, 3 or 4 times?)
         List<string> longer_instruction_list = new List<string>();
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < instructionMultiplicationNumber; i++)
         {
             longer_instruction_list.AddRange(instructions_to_give);
         }
-        Debug.Log(longer_instruction_list.Count);
 
         instructions = new List<string>(longer_instruction_list);
 
