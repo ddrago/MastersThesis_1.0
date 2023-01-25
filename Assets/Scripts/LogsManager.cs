@@ -38,7 +38,7 @@ public class LogsManager : MonoBehaviour
         filename = Application.persistentDataPath + "/" + participantNumber + "_" + baseFileName;
         System.IO.File.WriteAllLines(filename, new string[] {
             "InteractionType,Time,TimeMS,Item,itemToSelect,isCorrectItem",
-            "[STUDY START]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A"
+            "[INIT]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A"
         });
 
         // Log the gaze path directional data

@@ -21,11 +21,11 @@ public class ExperimentManager : MonoBehaviour
     private static System.Random rnd = new System.Random();
 
     private int currentInstructionItem = 0;
+    private string currentCondition;
 
     private void Awake()
     {
-        // Test 
-        StartCondition();
+
     }
 
     // Start is called before the first frame update
@@ -40,24 +40,36 @@ public class ExperimentManager : MonoBehaviour
         
     }
 
-    public void StartCondition()
+    public void StartExperiment()
+    {
+        instructionGiver.text = "Loading...";
+        logsManager.LogOnCSV("[START EXPERIMENT]", "N/A", "N/A", true);
+    }
+
+    public void StartCondition(string condition)
     {
         currentInstructionItem = 0;
+        currentCondition = condition;
+        
         instructions = new List<string>(instructions_to_give);
         // TODO: will need to multiplicate the instructions (2, 3 or 4 times?)
 
         instructions = instructions.OrderBy(a => rnd.Next()).ToList();
-        //Debug.Log(string.Join(",", instructions.ToArray()));
+        NextInstruction();
 
-        next_instruction = instructions[currentInstructionItem];
-        instructionGiver.text = next_instruction;
-
-        // TODO: get the current condition
-        logsManager.LogOnCSV("[START <TODO:CONDITION>]", "N/A", "N/A", true);
+        logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", true);
         logsManager.LogInstructions(instructions);
     }
 
-    
+    void NextInstruction()
+    {
+        if (currentInstructionItem < instructions.Count)
+        {
+            instructionGiver.text = instructions[currentInstructionItem];
+            currentInstructionItem += 1;
+        }
+    }
+
     public void SetStartButtonInteractiveStatus(bool status) 
     {
         StartConditionButton.GetComponent<Button>().interactable = status;
@@ -69,5 +81,12 @@ public class ExperimentManager : MonoBehaviour
         TouchscreenConditionButton.GetComponent<Button>().interactable = status;
         ControllerConditionButton.GetComponent<Button>().interactable = status;
         GesturesConditionButton.GetComponent<Button>().interactable = status;
+    }
+
+    public void loadNextInstruction()
+    {
+        next_instruction = instructions[currentInstructionItem];
+        instructionGiver.text = next_instruction;
+        currentInstructionItem += 1;
     }
 }

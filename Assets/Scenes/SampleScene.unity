@@ -886,6 +886,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 260627934}
+        m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
+        m_MethodName: StartCondition
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Gestures
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &295292115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1599,6 +1611,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 260627934}
+        m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
+        m_MethodName: StartCondition
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Touchscreen
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &569628733
@@ -2333,7 +2357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start condition
+  m_Text: Start experiment
 --- !u!222 &1108785324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2726,6 +2750,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 260627934}
+        m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
+        m_MethodName: StartCondition
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Controller
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1322286050
@@ -3137,6 +3173,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 260627934}
+        m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
+        m_MethodName: StartCondition
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Voice
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1456939168
@@ -4198,7 +4246,7 @@ GameObject:
   - component: {fileID: 2086925583}
   - component: {fileID: 2086925582}
   m_Layer: 5
-  m_Name: StartConditionButton
+  m_Name: StartExperimentButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4306,7 +4354,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 260627934}
         m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
-        m_MethodName: StartCondition
+        m_MethodName: StartExperiment
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
