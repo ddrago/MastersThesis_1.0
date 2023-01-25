@@ -51,9 +51,16 @@ public class ExperimentManager : MonoBehaviour
     {
         currentInstructionItem = 0;
         currentCondition = condition;
-        
-        instructions = new List<string>(instructions_to_give);
+
         // TODO: will need to multiplicate the instructions (2, 3 or 4 times?)
+        List<string> longer_instruction_list = new List<string>();
+        for(int i = 0; i < 3; i++)
+        {
+            longer_instruction_list.AddRange(instructions_to_give);
+        }
+        Debug.Log(longer_instruction_list.Count);
+
+        instructions = new List<string>(longer_instruction_list);
 
         instructions = instructions.OrderBy(a => rnd.Next()).ToList();
         instructionGiver.text = instructions[currentInstructionItem];
@@ -67,12 +74,16 @@ public class ExperimentManager : MonoBehaviour
     {
         currentInstructionItem += 1;
 
+        //Debug.Log("i: " + currentInstructionItem + "count: " + instructions.Count);
+        
         if (currentInstructionItem < instructions.Count)
         {
             instructionGiver.text = instructions[currentInstructionItem];
         }
         else
         {
+            // TODO: this is just temporary
+            currentInstructionItem = 0;
             Debug.Log("TODO: EndCondition()");
         }
     }

@@ -62,7 +62,7 @@ public class ControllerManager : MonoBehaviour
 
     void ControlsButtonPress(string item)
     {
-        Debug.Log(item + " Pressed!");
+        //Debug.Log(item + " Pressed!");
         PseudoConsole.text = item;
         experimentManager.SelectItem(item);
         //logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
