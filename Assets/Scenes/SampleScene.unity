@@ -761,6 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logsManager: {fileID: 1149382493}
+  instructionGiver: {fileID: 1858782901}
 --- !u!1 &295292112
 GameObject:
   m_ObjectHideFlags: 0

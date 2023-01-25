@@ -48,6 +48,8 @@ public class ExperimentManager : MonoBehaviour
         next_instruction = instructions[currentInstructionItem];
         instructionGiver.text = next_instruction;
 
+        // TODO: should also log the start of the condition via LogsManager
+
         logsManager.LogInstructions(instructions);
     }
 
