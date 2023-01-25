@@ -761,6 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed819b9e1ba05f44992cf07313ff61f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instructionMultiplicationNumber: 3
   logsManager: {fileID: 1149382493}
   instructionGiver: {fileID: 1858782901}
   StartConditionButton: {fileID: 2086925580}
@@ -1362,6 +1363,18 @@ MonoBehaviour:
           m_StringArgument: calls
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 551181517}
+        m_TargetAssemblyTypeName: HandGesturePrint, Assembly-CSharp
+        m_MethodName: PrintActivateMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: calls
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
@@ -1405,6 +1418,18 @@ MonoBehaviour:
       - m_Target: {fileID: 260627934}
         m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
         m_MethodName: SelectItem
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: maps
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 551181517}
+        m_TargetAssemblyTypeName: HandGesturePrint, Assembly-CSharp
+        m_MethodName: PrintActivateMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1485,6 +1510,18 @@ MonoBehaviour:
       - m_Target: {fileID: 260627934}
         m_TargetAssemblyTypeName: ExperimentManager, Assembly-CSharp
         m_MethodName: SelectItem
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: music
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 551181517}
+        m_TargetAssemblyTypeName: HandGesturePrint, Assembly-CSharp
+        m_MethodName: PrintActivateMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
