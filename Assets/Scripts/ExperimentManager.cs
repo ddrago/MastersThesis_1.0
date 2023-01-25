@@ -14,7 +14,8 @@ public class ExperimentManager : MonoBehaviour
     public GameObject ControllerConditionButton;
     public GameObject GesturesConditionButton;
 
-    private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "News", "Maps", "Sports" });
+    // TODO: update with better instructions if necessary
+    private static List<string> instructions_to_give = new List<string>(new string[] { "music", "news", "maps", "sport" });
     private static List<string> instructions;
     private string next_instruction;
 
@@ -64,10 +65,11 @@ public class ExperimentManager : MonoBehaviour
 
     void NextInstruction()
     {
+        currentInstructionItem += 1;
+
         if (currentInstructionItem < instructions.Count)
         {
             instructionGiver.text = instructions[currentInstructionItem];
-            currentInstructionItem += 1;
         }
         else
         {
@@ -88,22 +90,11 @@ public class ExperimentManager : MonoBehaviour
         GesturesConditionButton.GetComponent<Button>().interactable = status;
     }
 
-    public void loadNextInstruction()
-    {
-        next_instruction = instructions[currentInstructionItem];
-        instructionGiver.text = next_instruction;
-    }
-
     public void SelectItem(string item)
     {
         // User selected the correct item
-        if ((item.ToLower()).Equals(instructions[currentInstructionItem].ToLower()))
-        {
-            Debug.Log("Whoohooo!");
-        }
-        else
-        {
-            Debug.Log("uh-oh, spaghetti-os");
-        }
+        bool targetItemWasSelected = item.ToLower().Equals(instructions[currentInstructionItem].ToLower());
+        logsManager.LogOnCSV(string.Format("[{0}]", currentCondition.ToUpper()), item, instructions[currentInstructionItem], targetItemWasSelected);
+        NextInstruction();
     }
 }
