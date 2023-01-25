@@ -15,7 +15,7 @@ public class ExperimentManager : MonoBehaviour
     public GameObject GesturesConditionButton;
 
     // TODO: update with better instructions if necessary
-    private static List<string> instructions_to_give = new List<string>(new string[] { "music", "news", "maps", "sport" });
+    private static List<string> instructions_to_give = new List<string>(new string[] { "music", "calls", "maps" });
     private static List<string> instructions;
     private string next_instruction;
 
@@ -94,6 +94,7 @@ public class ExperimentManager : MonoBehaviour
     {
         // User selected the correct item
         bool targetItemWasSelected = item.ToLower().Equals(instructions[currentInstructionItem].ToLower());
+        Debug.Log(string.Format("item: {0}, target: {1}, isCorrect: {2}", item, instructions[currentInstructionItem], targetItemWasSelected));
         logsManager.LogOnCSV(string.Format("[{0}]", currentCondition.ToUpper()), item, instructions[currentInstructionItem], targetItemWasSelected);
         NextInstruction();
     }

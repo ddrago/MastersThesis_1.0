@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ControllerManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class ControllerManager : MonoBehaviour
 
     [Header("Utilities")]
     public LogsManager logsManager;
+    public ExperimentManager experimentManager;
+    Text PseudoConsole;
+
 
     void OnEnable()
     {
@@ -35,9 +39,9 @@ public class ControllerManager : MonoBehaviour
 
     private void Awake()
     {
-        mid.performed += context => ControlsButtonPress("Mid");
-        up.performed += context => ControlsButtonPress("North");
-        down.performed += context => ControlsButtonPress("South");
+        mid.performed += context => ControlsButtonPress("maps");
+        up.performed += context => ControlsButtonPress("calls");
+        down.performed += context => ControlsButtonPress("music");
         right.performed += context => ControlsButtonPress("East");
         left.performed += context => ControlsButtonPress("West");
     }
@@ -46,7 +50,7 @@ public class ControllerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PseudoConsole = GameObject.Find("PseudoConsole").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -55,12 +59,13 @@ public class ControllerManager : MonoBehaviour
 
     }
 
-    // NB: the 'buttonName' parameter is only temporary, it will be the proper item name 
-    // Which I haven't chosen yet
-    void ControlsButtonPress(string buttonName)
+
+    void ControlsButtonPress(string item)
     {
-        Debug.Log(buttonName + " Pressed!");
-        logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
+        Debug.Log(item + " Pressed!");
+        PseudoConsole.text = item;
+        experimentManager.SelectItem(item);
+        //logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
     }
 
 }
