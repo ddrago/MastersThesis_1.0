@@ -38,7 +38,7 @@ public class LogsManager : MonoBehaviour
         filename = Application.persistentDataPath + "/" + participantNumber + "_" + baseFileName;
         System.IO.File.WriteAllLines(filename, new string[] {
             "InteractionType,Time,TimeMS,Item,itemToSelect,isCorrectItem",
-            "[START]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A"
+            "[STUDY START]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A"
         });
 
         // Log the gaze path directional data
@@ -48,14 +48,14 @@ public class LogsManager : MonoBehaviour
         });
     }
 
-    public void LogOnCSV(string interactionType, string item, string itemToSelect, bool isCorrectItem)
+    public void LogOnCSV(string interactionType, string item, string targetItem, bool isCorrectItem)
     {
         System.IO.File.AppendAllLines(filename, new string[] {
-            interactionType + "," + DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + item + "," + itemToSelect + "," + isCorrectItem
+            interactionType + "," + DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + item + "," + targetItem + "," + isCorrectItem
         });
     }
 
-    // This method still needs to be figured out. Should the laptop measure tilt? 
+    // TODO: This method still needs to be figured out. Should the laptop measure tilt? 
     // Should the android phone log it? Should an additional phone strapped to the frame?
     public void LogTiltPath()
     {
@@ -76,12 +76,12 @@ public class LogsManager : MonoBehaviour
         //instruction_log_filename = currentInputMethod + "_" + "instructions.txt";
         instruction_log_filename = "instructions.txt";
 
-        //update filename
         instruction_log_filename = Application.persistentDataPath + "/" + instruction_log_filename;
         Debug.Log(instruction_log_filename);
 
         System.IO.FileInfo theSourceFile = new System.IO.FileInfo(instruction_log_filename);
         System.IO.File.WriteAllText(instruction_log_filename, string.Join(",", instructions.ToArray()));
+        
         //Just a debug functionality to make sure the file exists
         /*if (System.IO.File.Exists(instruction_log_filename))
         {

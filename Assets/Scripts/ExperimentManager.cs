@@ -8,6 +8,11 @@ public class ExperimentManager : MonoBehaviour
 {
     public LogsManager logsManager;
     public Text instructionGiver;
+    public GameObject StartConditionButton;
+    public GameObject VoiceConditionButton;
+    public GameObject TouchscreenConditionButton;
+    public GameObject ControllerConditionButton;
+    public GameObject GesturesConditionButton;
 
     private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "News", "Podcasts", "Sports" });
     private static List<string> instructions;
@@ -44,13 +49,25 @@ public class ExperimentManager : MonoBehaviour
         instructions = instructions.OrderBy(a => rnd.Next()).ToList();
         //Debug.Log(string.Join(",", instructions.ToArray()));
 
-        // TODO: need to initialise it to something at some point
         next_instruction = instructions[currentInstructionItem];
         instructionGiver.text = next_instruction;
 
-        // TODO: should also log the start of the condition via LogsManager
-
+        // TODO: get the current condition
+        logsManager.LogOnCSV("[START <TODO:CONDITION>]", "N/A", "N/A", true);
         logsManager.LogInstructions(instructions);
     }
 
+    
+    public void SetStartButtonInteractiveStatus(bool status) 
+    {
+        StartConditionButton.GetComponent<Button>().interactable = status;
+    }
+
+    public void SetConditionButtonsInteractiveStatus(bool status)
+    {
+        VoiceConditionButton.GetComponent<Button>().interactable = status;
+        TouchscreenConditionButton.GetComponent<Button>().interactable = status;
+        ControllerConditionButton.GetComponent<Button>().interactable = status;
+        GesturesConditionButton.GetComponent<Button>().interactable = status;
+    }
 }
