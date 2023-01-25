@@ -18,6 +18,7 @@ public class VoiceCommands : MonoBehaviour
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
     Text PseudoConsole;
+    public ExperimentManager experimentManager;
 
 
     // Start is called before the first frame update
@@ -62,9 +63,10 @@ public class VoiceCommands : MonoBehaviour
             Debug.Log("Voice commands not active!");
             return;
         } 
-        Debug.Log(phrase.text);
+        
         actions[phrase.text].Invoke();
         PseudoConsole.text = phrase.text;
+        experimentManager.SelectItem(phrase.text.ToLower());
     }
     #endif
 

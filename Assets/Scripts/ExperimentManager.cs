@@ -14,7 +14,7 @@ public class ExperimentManager : MonoBehaviour
     public GameObject ControllerConditionButton;
     public GameObject GesturesConditionButton;
 
-    private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "News", "Podcasts", "Sports" });
+    private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "News", "Maps", "Sports" });
     private static List<string> instructions;
     private string next_instruction;
 
@@ -55,7 +55,8 @@ public class ExperimentManager : MonoBehaviour
         // TODO: will need to multiplicate the instructions (2, 3 or 4 times?)
 
         instructions = instructions.OrderBy(a => rnd.Next()).ToList();
-        NextInstruction();
+        instructionGiver.text = instructions[currentInstructionItem];
+        //NextInstruction();
 
         logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", true);
         logsManager.LogInstructions(instructions);
@@ -67,6 +68,10 @@ public class ExperimentManager : MonoBehaviour
         {
             instructionGiver.text = instructions[currentInstructionItem];
             currentInstructionItem += 1;
+        }
+        else
+        {
+            Debug.Log("TODO: EndCondition()");
         }
     }
 
@@ -87,6 +92,18 @@ public class ExperimentManager : MonoBehaviour
     {
         next_instruction = instructions[currentInstructionItem];
         instructionGiver.text = next_instruction;
-        currentInstructionItem += 1;
+    }
+
+    public void SelectItem(string item)
+    {
+        // User selected the correct item
+        if ((item.ToLower()).Equals(instructions[currentInstructionItem].ToLower()))
+        {
+            Debug.Log("Whoohooo!");
+        }
+        else
+        {
+            Debug.Log("uh-oh, spaghetti-os");
+        }
     }
 }

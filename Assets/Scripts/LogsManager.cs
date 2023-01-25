@@ -77,7 +77,7 @@ public class LogsManager : MonoBehaviour
         instruction_log_filename = "instructions.txt";
 
         instruction_log_filename = Application.persistentDataPath + "/" + instruction_log_filename;
-        Debug.Log(instruction_log_filename);
+        //Debug.Log(instruction_log_filename);
 
         System.IO.FileInfo theSourceFile = new System.IO.FileInfo(instruction_log_filename);
         System.IO.File.WriteAllText(instruction_log_filename, string.Join(",", instructions.ToArray()));
