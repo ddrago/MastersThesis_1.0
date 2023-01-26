@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,10 @@ public class ExperimentManager : MonoBehaviour
 
     private static System.Random rnd = new System.Random();
 
+    // Mid-study variables
     private int currentInstructionItem = 0;
     private string currentCondition;
+    private bool studyCurrentlyOngoing = false;
 
     private void Awake()
     {
@@ -55,6 +58,7 @@ public class ExperimentManager : MonoBehaviour
     {
         currentInstructionItem = 0;
         currentCondition = condition;
+        studyCurrentlyOngoing = true;
 
         // TODO: will need to multiplicate the instructions (2, 3 or 4 times?)
         List<string> longer_instruction_list = new List<string>();
@@ -78,17 +82,20 @@ public class ExperimentManager : MonoBehaviour
         currentInstructionItem += 1;
 
         //Debug.Log("i: " + currentInstructionItem + "count: " + instructions.Count);
-        
+
         if (currentInstructionItem < instructions.Count)
         {
             instructionGiver.text = instructions[currentInstructionItem];
         }
-        else
-        {
-            // TODO: this is just temporary
-            currentInstructionItem = 0;
-            Debug.Log("TODO: EndCondition()");
-        }
+        else EndCondition();
+    }
+
+    private void EndCondition()
+    {
+        currentInstructionItem = 0;
+        studyCurrentlyOngoing = false;
+
+        Debug.Log("TODO: EndCondition()");
     }
 
     public void SetStartButtonInteractiveStatus(bool status) 
@@ -106,10 +113,14 @@ public class ExperimentManager : MonoBehaviour
 
     public void SelectItem(string item)
     {
-        // User selected the correct item
-        bool targetItemWasSelected = item.ToLower().Equals(instructions[currentInstructionItem].ToLower());
-        Debug.Log(string.Format("item: {0}, target: {1}, isCorrect: {2}", item, instructions[currentInstructionItem], targetItemWasSelected));
-        logsManager.LogOnCSV(string.Format("[{0}]", currentCondition.ToUpper()), item, instructions[currentInstructionItem], targetItemWasSelected);
-        NextInstruction();
+        if (studyCurrentlyOngoing)
+        {
+            // User selected the correct item
+            bool targetItemWasSelected = item.ToLower().Equals(instructions[currentInstructionItem].ToLower());
+            Debug.Log(string.Format("item: {0}, target: {1}, isCorrect: {2}", item, instructions[currentInstructionItem], targetItemWasSelected));
+            logsManager.LogOnCSV(string.Format("[{0}]", currentCondition.ToUpper()), item, instructions[currentInstructionItem], targetItemWasSelected);
+            NextInstruction();
+        }
+        else Debug.Log("WARNING: Before providing input, please select a condition.");
     }
 }
