@@ -13,11 +13,18 @@ public class ExperimentManager : MonoBehaviour
     [Header("GameObject Elements")]
     public LogsManager logsManager;
     public Text instructionGiver;
+
+    [Header("Menu Manager")]
     public GameObject StartConditionButton;
     public GameObject VoiceConditionButton;
     public GameObject TouchscreenConditionButton;
     public GameObject ControllerConditionButton;
     public GameObject GesturesConditionButton;
+    public GameObject MainMenu;
+    public GameObject VoiceMenu;
+    public GameObject TouchscreenMenu;
+    public GameObject ControllerMenu;
+    public GameObject GesturesMenu;
 
     // TODO: update with better instructions if necessary
     private static List<string> instructions_to_give = new List<string>(new string[] { "music", "calls", "maps" });
@@ -92,15 +99,15 @@ public class ExperimentManager : MonoBehaviour
 
     private void EndCondition()
     {
-        currentInstructionItem = 0;
         studyCurrentlyOngoing = false;
 
-        Debug.Log("TODO: EndCondition()");
-    }
+        logsManager.LogOnCSV(string.Format("[END {0} CONDITION]", currentCondition.ToUpper()), "N/A", "N/A", true);
 
-    public void SetStartButtonInteractiveStatus(bool status) 
-    {
-        StartConditionButton.GetComponent<Button>().interactable = status;
+        instructionGiver.text = "Loading...";
+
+        GoBackToMainMenu();
+
+        Debug.Log("TODO: EndCondition()");
     }
 
     public void SetConditionButtonsInteractiveStatus(bool status)
@@ -109,6 +116,18 @@ public class ExperimentManager : MonoBehaviour
         TouchscreenConditionButton.GetComponent<Button>().interactable = status;
         ControllerConditionButton.GetComponent<Button>().interactable = status;
         GesturesConditionButton.GetComponent<Button>().interactable = status;
+    }
+
+    public void GoBackToMainMenu()
+    {
+        // We want to be able to see the main menu
+        MainMenu.SetActive(true);
+
+        // And we want any other condition menu to disappear
+        VoiceMenu.SetActive(false);
+        TouchscreenMenu.SetActive(false);
+        ControllerMenu.SetActive(false);
+        GesturesMenu.SetActive(false);
     }
 
     public void SelectItem(string item)

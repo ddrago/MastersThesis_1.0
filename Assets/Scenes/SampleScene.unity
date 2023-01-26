@@ -769,6 +769,11 @@ MonoBehaviour:
   TouchscreenConditionButton: {fileID: 569628730}
   ControllerConditionButton: {fileID: 1322286047}
   GesturesConditionButton: {fileID: 295292112}
+  MainMenu: {fileID: 1494056656}
+  VoiceMenu: {fileID: 121578770}
+  TouchscreenMenu: {fileID: 1383442370}
+  ControllerMenu: {fileID: 750054803}
+  GesturesMenu: {fileID: 1503602904}
 --- !u!1 &295292112
 GameObject:
   m_ObjectHideFlags: 0
