@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Android;
 
 public class LogsManager : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class LogsManager : MonoBehaviour
     private readonly string baseTiltPathFilename = "gazepath.csv";
     private string tiltPathFilename;
     private static string instruction_log_filename = "instructions.txt";
+
+    // GPS stuff to get the speed of the user
+    public bool isUpdating;
 
     // Called before Start
     private void Awake()
@@ -29,7 +34,7 @@ public class LogsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void InitLogging()
@@ -44,7 +49,7 @@ public class LogsManager : MonoBehaviour
         // Log the gaze path directional data
         tiltPathFilename = Application.persistentDataPath + "/" + participantNumber + "_" + baseTiltPathFilename;
         System.IO.File.WriteAllLines(tiltPathFilename, new string[] {
-            "timestamp,tilt"
+            "Time,TimeMS,Tilt"
         });
     }
 
@@ -55,19 +60,11 @@ public class LogsManager : MonoBehaviour
         });
     }
 
-    // TODO: This method still needs to be figured out. Should the laptop measure tilt? 
-    // Should the android phone log it? Should an additional phone strapped to the frame?
-    public void LogTiltPath()
+    public void LogTilt(Vector3 tilt)
     {
-        /*if (Physics.Raycast(_ray, out _hitInfo, 100))
-        {
-            Debug.Log(_hitInfo.point.ToString());
-            System.IO.File.AppendAllLines(gazePathFilename, new string[] {
-                _hitInfo.point.x.ToString() + "," +  _hitInfo.point.y.ToString() + "," +  _hitInfo.point.z.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + _hitInfo.collider.gameObject.name
-            });
-        }*/
-
-        
+        System.IO.File.AppendAllLines(tiltPathFilename, new string[] {
+            DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + tilt
+        });
     }
 
     public void LogInstructions(List<string> instructions)

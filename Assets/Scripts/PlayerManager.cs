@@ -6,30 +6,38 @@ using Mirror;
 
 public class PlayerManager : NetworkBehaviour
 {
-    TouchscreenMenu TouchscreenScriptComponent;
+    GameObject touchscreenMenu;
     Text PseudoConsole;
 
     // Start is called before the first frame update
     void Start()
     {
-        TouchscreenScriptComponent = GameObject.Find("TouchscreenMenu").GetComponent<TouchscreenMenu>();
+        Debug.Log("What? Hello!");
+        /*
+        touchscreenMenu = GameObject.Find("TouchscreenMenu");
+        Debug.Log(touchscreenMenu is null);
+
         PseudoConsole = GameObject.Find("PseudoConsole").GetComponent<Text>();
+        Debug.Log(PseudoConsole is null);*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (TouchscreenScriptComponent.getButton1IsPressed())
+        /*if (touchscreenMenu.GetComponent<TouchscreenMenu>() != null)
         {
-            print("We pressed a button");
-            CmdYoyo();
-        }
+            if (touchscreenMenu.GetComponent<TouchscreenMenu>().getButton1IsPressed())
+            {
+                print("We pressed a button");
+                CmdYoyo();
+            }
+        }*/
     }
 
     [Command(requiresAuthority = false)]
-    void CmdYoyo()
+    public void CmdYoyo()
     {
         Debug.Log("A client Pressed a button!");
-        PseudoConsole.text = "TADA!";
+        //PseudoConsole.text = "TADA!";
     }
 }

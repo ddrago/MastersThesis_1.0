@@ -30,15 +30,15 @@ public class VoiceCommands : MonoBehaviour
 
         actions.Add("music", Gotit);
         actions.Add("news", Gotit);
-        actions.Add("podcasts", Gotit);
-        actions.Add("sport", Gotit);
+        //actions.Add("podcasts", Gotit);
+        //actions.Add("sport", Gotit);
         actions.Add("weather", Gotit);
-        actions.Add("terrains", Gotit);
-        actions.Add("performance", Gotit);
-        actions.Add("compare", Gotit);
+        actions.Add("terrain", Gotit);
+        //actions.Add("performance", Gotit);
+        //actions.Add("compare", Gotit);
         actions.Add("maps", Gotit);
-        actions.Add("navigation", Gotit);
-        actions.Add("contacts", Gotit);
+        //actions.Add("navigation", Gotit);
+        //actions.Add("contacts", Gotit);
         actions.Add("calls", Gotit);
 
         #if UNITY_STANDALONE_WIN

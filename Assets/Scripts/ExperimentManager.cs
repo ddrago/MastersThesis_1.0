@@ -15,7 +15,6 @@ public class ExperimentManager : MonoBehaviour
     public Text instructionGiver;
 
     [Header("Menu Manager")]
-    public GameObject StartConditionButton;
     public GameObject VoiceConditionButton;
     public GameObject TouchscreenConditionButton;
     public GameObject ControllerConditionButton;
@@ -27,7 +26,7 @@ public class ExperimentManager : MonoBehaviour
     public GameObject GesturesMenu;
 
     // TODO: update with better instructions if necessary
-    private static List<string> instructions_to_give = new List<string>(new string[] { "music", "calls", "maps" });
+    private static List<string> instructions_to_give = new List<string>(new string[] { "music", "calls", "maps", "news", "weather", "terrain" });
     private static List<string> instructions;
     private string next_instruction;
 
@@ -106,8 +105,6 @@ public class ExperimentManager : MonoBehaviour
         instructionGiver.text = "Loading...";
 
         GoBackToMainMenu();
-
-        Debug.Log("TODO: EndCondition()");
     }
 
     public void SetConditionButtonsInteractiveStatus(bool status)
