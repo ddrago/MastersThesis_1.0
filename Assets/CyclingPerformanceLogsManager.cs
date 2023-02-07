@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.Android;
 
 public class CyclingPerformanceLogsManager : MonoBehaviour
 {
@@ -11,10 +13,30 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
 
     public LogsManager logsManager;
 
+    void OnEnable()
+    {
+        if (!Permission.HasUserAuthorizedPermission("android.permission.ACTIVITY_RECOGNITION"))
+        {
+            Permission.RequestUserPermission("android.permission.ACTIVITY_RECOGNITION");
+        }
+
+        if (Accelerometer.current != null)
+            InputSystem.EnableDevice(Accelerometer.current);
+    }
+
+    protected void OnDisable()
+    {
+        if (Accelerometer.current != null)
+            InputSystem.DisableDevice(Accelerometer.current);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+/*        if (!Accelerometer.current.enabled)
+        {
+            InputSystem.EnableDevice(Accelerometer.current);
+        }*/
     }
 
     // Update is called once per frame
@@ -36,8 +58,8 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
         //OPTION 4
         logsManager.LogTilt(GetAccelerations());
 
-        //Vector3 dir = GetAccelerations();
-        //PseudoConsole.text = String.Format("x: {0},\n y: {1},\n z: {2}", dir.x.ToString("F2"), dir.y.ToString("F2"), dir.z.ToString("F2"));
+        Vector3 dir = GetAccelerations();
+        PseudoConsole.text = String.Format("x: {0},\n y: {1},\n z: {2}", dir.x.ToString("F2"), dir.y.ToString("F2"), dir.z.ToString("F2"));
     }
 
     // we assume that device is held parallel to the ground
@@ -45,20 +67,30 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
     // a_z should be upward acceletarion (aka at most times just gravity)
     public Vector3 GetAccelerations()
     {
-        Vector3 dir = Input.acceleration;
 
-        // remap device acceleration axis to game coordinates:
-        //  1) XY plane of the device is mapped onto XZ plane
-        //  2) rotated 90 degrees around Y axis
-        dir.x = Input.acceleration.y;
-        dir.y = Input.acceleration.z;
-        dir.z = Input.acceleration.x;
+        #if UNITY_EDITOR
+            Vector3 dir = Input.acceleration;
 
-        /*// clamp acceleration vector to unit sphere
-        if (dir.sqrMagnitude > 1)
-            dir.Normalize();*/
+            /* // clamp acceleration vector to unit sphere
+            if (dir.sqrMagnitude > 1)
+                dir.Normalize();*/
 
-        return dir;
+            return dir;
+        #elif UNITY_ANDROID
+            if (!Accelerometer.current.enabled)
+            {
+                PseudoConsole.text = "The Device is not enabled";
+                InputSystem.EnableDevice(Accelerometer.current);
+            }
+            else
+            {
+                return Accelerometer.current.acceleration.ReadValue();
+            }
+
+            return Vector3.zero;
+        #endif
+        //It's neither unity editor nor android
+        return Vector3.zero;
     }
 
     // OPTION 1
@@ -164,24 +196,27 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
     IEnumerator LocationCoroutine()
     {
         // Uncomment if you want to test with Unity Remote
-#if UNITY_EDITOR
-        yield return new WaitWhile(() => !UnityEditor.EditorApplication.isRemoteConnected);
-        yield return new WaitForSecondsRealtime(5f);
-#endif
-#if UNITY_EDITOR
-        // No permission handling needed in Editor
-#elif UNITY_ANDROID
-        if (!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.CoarseLocation)) {
-            UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.CoarseLocation);
-        }
+        /*#if UNITY_EDITOR
+                yield return new WaitWhile(() => !UnityEditor.EditorApplication.isRemoteConnected);
+                yield return new WaitForSecondsRealtime(5f);
+        #endif*/
+        #if UNITY_EDITOR
+                // No permission handling needed in Editor
+        #elif UNITY_ANDROID
+                if (!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.CoarseLocation)) {
+                    UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.CoarseLocation);
+                }
 
-        // First, check if user has location service enabled
-        if (!UnityEngine.Input.location.isEnabledByUser) {
-            // TODO Failure
-            Debug.LogFormat("Android and Location not enabled");
-            yield break;
-        }
-#endif
+                // First, check if user has location service enabled
+                if (!UnityEngine.Input.location.isEnabledByUser) {
+                    // TODO Failure
+                    PseudoConsole.text = "Location not enabled";
+                    yield break;
+                }
+                else {
+                    PseudoConsole.text = "Location is enabled";
+                }
+        #endif
         // Start service before querying location
         UnityEngine.Input.location.Start(500f, 500f);
 
@@ -189,19 +224,20 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
         int maxWait = 15;
         while (UnityEngine.Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
         {
+            PseudoConsole.text = UnityEngine.Input.location.status.ToString();
             yield return new WaitForSecondsRealtime(1);
             maxWait--;
         }
 
         // Editor has a bug which doesn't set the service status to Initializing. So extra wait in Editor.
-#if UNITY_EDITOR
-        int editorMaxWait = 15;
-        while (UnityEngine.Input.location.status == LocationServiceStatus.Stopped && editorMaxWait > 0)
-        {
-            yield return new WaitForSecondsRealtime(1);
-            editorMaxWait--;
-        }
-#endif
+        #if UNITY_EDITOR
+                int editorMaxWait = 15;
+                while (UnityEngine.Input.location.status == LocationServiceStatus.Stopped && editorMaxWait > 0)
+                {
+                    yield return new WaitForSecondsRealtime(1);
+                    editorMaxWait--;
+                }
+        #endif
 
         // Service didn't initialize in 15 seconds
         if (maxWait < 1)
@@ -215,7 +251,7 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
         if (UnityEngine.Input.location.status != LocationServiceStatus.Running)
         {
             // TODO Failure
-            Debug.Log(String.Format("Unable to determine device location. Failed with status {0}", UnityEngine.Input.location.status));
+            PseudoConsole.text = String.Format("Unable to determine device location. Failed with status {0}", UnityEngine.Input.location.status);
             yield break;
         }
         else

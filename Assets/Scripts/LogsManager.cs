@@ -13,7 +13,7 @@ public class LogsManager : MonoBehaviour
     //The name of the logging files - MODIFY FOR EACH PARTICIPANT
     private readonly string baseFileName = "log.csv";
     private string filename;
-    private readonly string baseTiltPathFilename = "gazepath.csv";
+    private readonly string baseTiltPathFilename = "tilt.csv";
     private string tiltPathFilename;
     private static string instruction_log_filename = "instructions.txt";
 
@@ -63,7 +63,7 @@ public class LogsManager : MonoBehaviour
     public void LogTilt(Vector3 tilt)
     {
         System.IO.File.AppendAllLines(tiltPathFilename, new string[] {
-            DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + tilt
+            DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + tilt.x + "," + tilt.y + "," + tilt.z
         });
     }
 
