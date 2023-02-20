@@ -870,6 +870,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   pseudoConsole: {fileID: 4225755099943920677}
+  StartExperimentButton: {fileID: 4225755098673662085}
 --- !u!1 &4225755098981366584
 GameObject:
   m_ObjectHideFlags: 0

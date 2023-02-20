@@ -8,6 +8,7 @@ public class MirrorUIManager : NetworkBehaviour
 {
     [Header("UI Elements")]
     public Text pseudoConsole;
+    public Button StartExperimentButton;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,14 @@ public class MirrorUIManager : NetworkBehaviour
 
     public void OnStartExperiment()
     {
-        CmdDoServerStuff(true);
+        CmdPressStartExperimentButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressStartExperimentButton()
+    {
+        StartExperimentButton.onClick.Invoke();
+        pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     [Command(requiresAuthority = false)]
