@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class MirrorUIManager : NetworkBehaviour
 {
-    [Header("UI Elements")]
+    [Header("Experiment Menu objects")]
     public Text pseudoConsole;
     public Button StartExperimentButton;
+
+    [Header("Main Menu objects")]
+    public Button ControllerExperimentButton;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class MirrorUIManager : NetworkBehaviour
         
     }
 
+    //--START EXPERIMENT BUTTON--
     public void OnStartExperiment()
     {
         CmdPressStartExperimentButton();
@@ -31,7 +35,20 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressStartExperimentButton()
     {
         StartExperimentButton.onClick.Invoke();
-        pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--CONTROLLER BUTTON--
+    public void OnControllerExperiment()
+    {
+        CmdPressControllerExperimentButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressControllerExperimentButton()
+    {
+        ControllerExperimentButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     [Command(requiresAuthority = false)]
