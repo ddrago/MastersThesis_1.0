@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Android;
+using Mirror;
 
-public class LogsManager : MonoBehaviour
+public class LogsManager : NetworkBehaviour
 {
     [Header("Logging Utilities")]
     public int participantNumber;

@@ -9,10 +9,12 @@ public class PlayerManager : NetworkBehaviour
     GameObject touchscreenMenu;
     Text PseudoConsole;
 
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("What? Hello!");
+
         /*
         touchscreenMenu = GameObject.Find("TouchscreenMenu");
         Debug.Log(touchscreenMenu is null);
