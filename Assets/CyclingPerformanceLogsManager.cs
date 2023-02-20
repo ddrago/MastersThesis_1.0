@@ -30,16 +30,11 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
             InputSystem.DisableDevice(Accelerometer.current);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-/*        if (!Accelerometer.current.enabled)
-        {
-            InputSystem.EnableDevice(Accelerometer.current);
-        }*/
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         //OPTION 1
@@ -57,9 +52,6 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
 
         //OPTION 4
         logsManager.LogTilt(GetAccelerations());
-
-        Vector3 dir = GetAccelerations();
-        PseudoConsole.text = String.Format("x: {0},\n y: {1},\n z: {2}", dir.x.ToString("F2"), dir.y.ToString("F2"), dir.z.ToString("F2"));
     }
 
     // we assume that device is held parallel to the ground
@@ -79,7 +71,7 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
         #elif UNITY_ANDROID
             if (!Accelerometer.current.enabled)
             {
-                PseudoConsole.text = "The Device is not enabled";
+                PseudoConsole.text = "The accelerometer is not enabled";
                 InputSystem.EnableDevice(Accelerometer.current);
             }
             else

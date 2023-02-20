@@ -49,7 +49,7 @@ public class LogsManager : MonoBehaviour
         // Log the gaze path directional data
         tiltPathFilename = Application.persistentDataPath + "/" + participantNumber + "_" + baseTiltPathFilename;
         System.IO.File.WriteAllLines(tiltPathFilename, new string[] {
-            "Time,TimeMS,Tilt"
+            "Time,TimeMS,TiltX,TiltY,TiltZ"
         });
     }
 
