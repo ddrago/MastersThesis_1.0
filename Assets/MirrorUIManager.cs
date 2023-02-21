@@ -18,6 +18,12 @@ public class MirrorUIManager : NetworkBehaviour
     public Button ControllerExperimentButton;
     public Button GesturesExperimentButton;
 
+    [Header("Back Buttons")]
+    public Button VoiceBackButton;
+    public Button TouchscreenBackButton;
+    public Button ControllerBackButton;
+    public Button GesturesBackButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +98,58 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressGesturesExperimentButton()
     {
         GesturesExperimentButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--VOICE BACK BUTTON--
+    public void OnVoiceBack()
+    {
+        CmdPressVoiceBackButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressVoiceBackButton()
+    {
+        VoiceBackButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BACK BUTTON--
+    public void OnTouchscreenBack()
+    {
+        CmdPressTouchscreenBackButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenBackButton()
+    {
+        TouchscreenBackButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--CONTROLLER BACK BUTTON--
+    public void OnControllerBack()
+    {
+        CmdPressControllerBackButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressControllerBackButton()
+    {
+        ControllerBackButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--GESTURES BACK BUTTON--
+    public void OnGesturesBack()
+    {
+        CmdPressGesturesBackButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressGesturesBackButton()
+    {
+        GesturesBackButton.onClick.Invoke();
         //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
