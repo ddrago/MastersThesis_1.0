@@ -24,6 +24,14 @@ public class MirrorUIManager : NetworkBehaviour
     public Button ControllerBackButton;
     public Button GesturesBackButton;
 
+    [Header("Touchscreen Menu objects")]
+    public Button TouchscreenButton0;
+    public Button TouchscreenButton1;
+    public Button TouchscreenButton2;
+    public Button TouchscreenButton3;
+    public Button TouchscreenButton4;
+    public Button TouchscreenButton5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -150,6 +158,84 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressGesturesBackButton()
     {
         GesturesBackButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BUTTON 0--
+    public void OnTouchscreenButton0()
+    {
+        CmdPressTouchscreenButton0();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenButton0()
+    {
+        TouchscreenButton0.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BUTTON 1--
+    public void OnTouchscreenButton1()
+    {
+        CmdPressTouchscreenButton1();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenButton1()
+    {
+        TouchscreenButton1.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BUTTON 2--
+    public void OnTouchscreenButton2()
+    {
+        CmdPressTouchscreenButton2();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenButton2()
+    {
+        TouchscreenButton2.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BUTTON 3--
+    public void OnTouchscreenButton3()
+    {
+        CmdPressTouchscreenButton3();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenButton3()
+    {
+        TouchscreenButton3.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BUTTON 4--
+    public void OnTouchscreenButton4()
+    {
+        CmdPressTouchscreenButton4();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenButton4()
+    {
+        TouchscreenButton4.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BUTTON 5--
+    public void OnTouchscreenButton5()
+    {
+        CmdPressTouchscreenButton5();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenButton5()
+    {
+        TouchscreenButton5.onClick.Invoke();
         //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 

@@ -341,6 +341,18 @@ MonoBehaviour:
           m_StringArgument: maps
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton0
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4225755098673662087
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +891,12 @@ MonoBehaviour:
   TouchscreenBackButton: {fileID: 4225755100351621860}
   ControllerBackButton: {fileID: 4225755099220619186}
   GesturesBackButton: {fileID: 4225755099264554811}
+  TouchscreenButton0: {fileID: 4225755098625443300}
+  TouchscreenButton1: {fileID: 4225755100268014434}
+  TouchscreenButton2: {fileID: 4225755099973651632}
+  TouchscreenButton3: {fileID: 4225755099864762561}
+  TouchscreenButton4: {fileID: 4225755099996404760}
+  TouchscreenButton5: {fileID: 4225755099706502499}
 --- !u!1 &4225755098981366584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,6 +2435,18 @@ MonoBehaviour:
           m_StringArgument: terrain
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton5
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4225755099713148913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,6 +2998,18 @@ MonoBehaviour:
           m_StringArgument: calls
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4225755099943920679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3192,6 +3234,18 @@ MonoBehaviour:
           m_StringArgument: news
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4225755099995642326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3410,6 +3464,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: weather
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4225755100027179032
@@ -4273,6 +4339,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: music
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4225755100340176893
