@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MirrorUIManager : NetworkBehaviour
 {
+    // For whatever reason having a general "OnButtonPress" doesn't work :(
+
     [Header("Experiment Menu objects")]
     public Text pseudoConsole;
     public Button StartExperimentButton;
