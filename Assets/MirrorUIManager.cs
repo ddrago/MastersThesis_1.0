@@ -13,7 +13,10 @@ public class MirrorUIManager : NetworkBehaviour
     public Button StartExperimentButton;
 
     [Header("Main Menu objects")]
+    public Button VoiceExperimentButton;
+    public Button TouchscreenExperimentButton;
     public Button ControllerExperimentButton;
+    public Button GesturesExperimentButton;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,32 @@ public class MirrorUIManager : NetworkBehaviour
         //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
+    //--VOICE BUTTON--
+    public void OnVoiceExperiment()
+    {
+        CmdPressVoiceExperimentButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressVoiceExperimentButton()
+    {
+        VoiceExperimentButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--TOUCHSCREEN BUTTON--
+    public void OnTouchscreenExperiment()
+    {
+        CmdPressTouchscreenExperimentButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressTouchscreenExperimentButton()
+    {
+        TouchscreenExperimentButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
     //--CONTROLLER BUTTON--
     public void OnControllerExperiment()
     {
@@ -52,6 +81,21 @@ public class MirrorUIManager : NetworkBehaviour
         ControllerExperimentButton.onClick.Invoke();
         //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
+
+    //--GESTURES BUTTON--
+    public void OnGesturesExperiment()
+    {
+        CmdPressGesturesExperimentButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressGesturesExperimentButton()
+    {
+        GesturesExperimentButton.onClick.Invoke();
+        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
+    }
+
+    //--
 
     [Command(requiresAuthority = false)]
     void CmdDoServerStuff(bool newValue)
