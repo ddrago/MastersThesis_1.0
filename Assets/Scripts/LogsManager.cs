@@ -42,6 +42,9 @@ public class LogsManager : MonoBehaviour
     {
         // Log the browing and selection data
         filename = Application.persistentDataPath + "/" + participantNumber + "_" + baseFileName;
+        
+        Debug.Log(filename);
+
         System.IO.File.WriteAllLines(filename, new string[] {
             "InteractionType,Time,TimeMS,Item,itemToSelect,isCorrectItem",
             "[INIT]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A"

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
+using System.Linq;
+using System;
 
 public class MirrorUIManager : NetworkBehaviour
 {
@@ -32,6 +34,13 @@ public class MirrorUIManager : NetworkBehaviour
     public Button TouchscreenButton4;
     public Button TouchscreenButton5;
 
+    private static System.Random rnd = new System.Random();
+    public LogsManager logsManager;
+    public ExperimentManager experimentManager;
+
+    // Useful variables
+    public readonly SyncList<string> instructions = new SyncList<string>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +52,8 @@ public class MirrorUIManager : NetworkBehaviour
     {
         
     }
+
+    #region buttonSyncing
 
     //--START EXPERIMENT BUTTON--
     public void OnStartExperiment()
@@ -239,11 +250,63 @@ public class MirrorUIManager : NetworkBehaviour
         //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
-    //--
+    #endregion
 
     [Command(requiresAuthority = false)]
     void CmdDoServerStuff(bool newValue)
     {
         pseudoConsole.text = newValue.ToString(); // do stuff on server
     }
+
+    #region Instructions
+
+    [ServerCallback]
+    public void ServerSetInstructions(List<string> longer_instruction_list, Text instructionGiver, int currentInstructionItem, string condition)
+    {
+        instructions.Clear();
+        instructions.AddRange(longer_instruction_list.OrderBy(a => rnd.Next()).ToList());
+
+        instructionGiver.text = instructions[currentInstructionItem];
+        Debug.Log("SERVER: " + instructions[currentInstructionItem]);
+        RpcUpdateInstructions(instructions[currentInstructionItem]);
+        //TargetUpdateInstructionGiver(instructions[currentInstructionItem], instructionGiver);
+        //NextInstruction();
+
+        logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", true);
+        logsManager.LogInstructions(instructions.ToList<string>());
+    }
+
+    [ClientRpc]
+    public void RpcUpdateInstructions(string instruction)
+    {
+        Debug.Log("Checkpoint");
+        experimentManager.updateInstructionGiver(instruction);
+        Debug.Log("CLIENT: " + instruction);
+    }
+
+    public List<string> GetInstructions()
+    {
+        return instructions.ToList<string>();
+    }
+
+    /*
+        [TargetRpc]
+        public void TargetUpdateInstructionGiver(string instruction, Component instructionGiver)
+        {
+            Debug.Log("Will it work?");
+            instructionGiver.GetComponent<Text>().text = instruction;
+            Debug.Log("CLIENT: " + instruction);
+        }*/
+
+    #endregion
+
+    #region tiltLogging
+
+    [ClientCallback]
+    public void logTilt(Vector3 acceleration)
+    {
+        logsManager.LogTilt(acceleration);
+    }
+
+    #endregion
 }

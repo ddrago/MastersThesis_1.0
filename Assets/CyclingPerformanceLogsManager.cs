@@ -12,6 +12,7 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
     public Text PseudoConsole;
 
     public LogsManager logsManager;
+    public MirrorUIManager mirrorUIManager;
 
     void OnEnable()
     {
@@ -51,7 +52,7 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
         //StartCoroutine(LocationCoroutine());
 
         //OPTION 4
-        logsManager.LogTilt(GetAccelerations());
+        mirrorUIManager.logTilt(GetAccelerations()); 
     }
 
     // we assume that device is held parallel to the ground
@@ -83,6 +84,7 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
         #endif
         //It's neither unity editor nor android
         return Vector3.zero;
+
     }
 
     // OPTION 1
