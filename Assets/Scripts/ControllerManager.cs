@@ -60,11 +60,12 @@ public class ControllerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scrollbar.gameObject.SetActive(true);
         scrollbar.value = 1; // At the start, we should see the first element of the list of buttons
 
         //FOR TESTING PURPOSES
         OnStartControllerExperiment();
-        ShuffleTouchscreenMenuItems();
+        //ShuffleTouchscreenMenuItems();
     }
 
     public void ShuffleTouchscreenMenuItems()
@@ -101,17 +102,27 @@ public class ControllerManager : MonoBehaviour
         //pseudoConsole.text = currentItemIndex.ToString();
         pseudoConsole.text = "Select";
 
-        ShuffleTouchscreenMenuItems();
+        //ShuffleTouchscreenMenuItems();
     }
 
     private void MoveUp()
     {
-        //De-select last element selected
-
-        if (currentItemIndex - 1 < 0)
-            currentItemIndex = 0;
-        else
-            currentItemIndex--;
+        if (!(items is null))
+        {
+            //Deal with the index
+            if (currentItemIndex - 1 < 0)
+                currentItemIndex = 0;
+            else
+                currentItemIndex--;
+            if (scrollbar != null)
+            {
+                //Deal with the scrollbar
+                if (scrollbar.value >= 1)
+                    scrollbar.value = 1;
+                else
+                    scrollbar.value = scrollbar.value + (1f / (float)items.Length);
+            }
+        }
 
         // DEBUG
         //Debug.Log("Up");
@@ -126,10 +137,22 @@ public class ControllerManager : MonoBehaviour
     {
         if(!(items is null))
         {
+            //Deal with the index
             if (currentItemIndex + 1 > items.Length-1)
                 currentItemIndex = items.Length - 1;
             else
                 currentItemIndex++;
+
+            if(scrollbar != null)
+            {
+                //Deal with the scrollbar
+                if (scrollbar.value <= 0)
+                    scrollbar.value = 0;
+                else
+                {
+                    scrollbar.value = scrollbar.value - (1f / (float)items.Length);
+                }
+            }
         }
 
         // DEBUG

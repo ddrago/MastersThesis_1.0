@@ -1618,6 +1618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experimentManager: {fileID: 4225755100613075029}
   pseudoConsole: {fileID: 4225755099943920677}
+  scrollbar: {fileID: 0}
 --- !u!1 &4225755099114872086
 GameObject:
   m_ObjectHideFlags: 0

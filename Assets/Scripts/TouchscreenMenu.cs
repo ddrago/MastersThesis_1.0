@@ -21,7 +21,6 @@ public class TouchscreenMenu : MonoBehaviour
     public void ShuffleTouchscreenMenuItems()
 
     {
-
         GameObject[] items = GameObject.FindGameObjectsWithTag("TouchscreenMenuSelectableItems");
 
         int[] indexList = new int[items.Length]; //.OrderBy(a => rnd.Next()).ToList();
@@ -33,7 +32,6 @@ public class TouchscreenMenu : MonoBehaviour
         {
             items[i].transform.SetSiblingIndex(indexList[i]);
         }
-
     }
 
     public void buttonPress(string item)
