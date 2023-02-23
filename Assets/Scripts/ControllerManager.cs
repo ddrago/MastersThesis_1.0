@@ -20,10 +20,11 @@ public class ControllerManager : MonoBehaviour
     public ExperimentManager experimentManager;*/
     public Text pseudoConsole;
     public Scrollbar scrollbar;
+    public MirrorUIManager mirrorUIManager;
 
     //List navigation handling
     private GameObject[] items;
-    private int currentItemIndex = 0;
+    //private int currentItemIndex = 0;
     private static System.Random rnd = new System.Random();
 
     void OnEnable()
@@ -64,7 +65,7 @@ public class ControllerManager : MonoBehaviour
         scrollbar.value = 1; // At the start, we should see the first element of the list of buttons
 
         //FOR TESTING PURPOSES
-        OnStartControllerExperiment();
+        //OnStartControllerExperiment();
         //ShuffleTouchscreenMenuItems();
     }
 
@@ -89,12 +90,7 @@ public class ControllerManager : MonoBehaviour
                     .OrderBy(obj => obj.name, new AlphanumComparatorFast())
                     .ToArray<GameObject>();
 
-        if (items != null) //This may not work i seem to vaguely recall
-        {
-            Debug.Log(items[currentItemIndex].name);
-            items[currentItemIndex].GetComponent<Button>().Select();
-            //items[currentItemIndex].SetActive(true);
-        }
+        if (items != null) items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponent<Button>().Select();
     }
 
     private void Click()
@@ -111,63 +107,47 @@ public class ControllerManager : MonoBehaviour
     {
         if (!(items is null))
         {
-            //Deal with the index
-            if (currentItemIndex - 1 < 0)
-                currentItemIndex = 0;
-            else
-                currentItemIndex--;
+            mirrorUIManager.DecreaseCurrentControllerItemIndex();
 
-            if (scrollbar != null)
-            {
-                //Deal with the scrollbar
+/*                //Deal with the scrollbar
                 if (scrollbar.value >= 1)
                     scrollbar.value = 1;
                 else
-                    scrollbar.value = scrollbar.value + (1f / (float)(items.Length - 1));
-                Debug.Log(scrollbar.value);
-            }
+                    scrollbar.value = scrollbar.value + (1f / (float)(items.Length - 1));*/
+                UpdateScrollBar(mirrorUIManager.GetCurrentControllerItemIndex());
         }
 
-        // DEBUG
-        //Debug.Log("Up");
-        //pseudoConsole.text = currentItemIndex.ToString();
-        //pseudoConsole.text = "Up";
-
         //visual output
-        items[currentItemIndex].GetComponent<Button>().Select();
+        items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponent<Button>().Select();
     }
 
     private void MoveDown()
     {
         if(!(items is null))
         {
-            //Deal with the index
-            if (currentItemIndex + 1 > items.Length-1)
-                currentItemIndex = items.Length - 1;
-            else
-                currentItemIndex++;
+            mirrorUIManager.IncreaseCurrentControllerItemIndex(items.Length);
 
-            if(scrollbar != null)
-            {
-                //Deal with the scrollbar
+                /*//Deal with the scrollbar
                 if (scrollbar.value <= 0)
                     scrollbar.value = 0;
                 else
-                {
-                    scrollbar.value = scrollbar.value - (1f / (float)(items.Length - 1));
-                }
-                Debug.Log(scrollbar.value);
-            }
+                    scrollbar.value = scrollbar.value - (1f / (float)(items.Length - 1));*/
+
+                UpdateScrollBar(mirrorUIManager.GetCurrentControllerItemIndex());
         }
 
-        // DEBUG
-        /*Debug.Log("Down");
-        pseudoConsole.text = currentItemIndex.ToString();*/
-        //pseudoConsole.text = "Down";
-
         //visual output
-        items[currentItemIndex].GetComponent<Button>().Select();
+        items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponent<Button>().Select();
+    }
 
+    public void HighlightSelectedItem(int index)
+    {
+        items[index].GetComponent<Button>().Select();
+    }
+
+    public void UpdateScrollBar(int index)
+    {
+        if (scrollbar != null) scrollbar.value = 1f - index / 5f;
     }
 
     void ControlsButtonPress(string item)

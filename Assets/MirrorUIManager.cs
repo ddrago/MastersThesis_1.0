@@ -37,9 +37,13 @@ public class MirrorUIManager : NetworkBehaviour
     private static System.Random rnd = new System.Random();
     public LogsManager logsManager;
     public ExperimentManager experimentManager;
+    public ControllerManager controllerManager;
 
     // Useful variables
     public readonly SyncList<string> instructions = new SyncList<string>();
+
+    [SyncVar(hook = nameof(UpdateCurrentControllerItemIndex))]
+    public int currentControllerItemIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -297,6 +301,44 @@ public class MirrorUIManager : NetworkBehaviour
             instructionGiver.GetComponent<Text>().text = instruction;
             Debug.Log("CLIENT: " + instruction);
         }*/
+
+    #endregion
+
+    #region ControllerManager
+
+    [Client]
+    public void UpdateCurrentControllerItemIndex(int oldIndex, int newIndex)
+    {
+
+        pseudoConsole.text = newIndex.ToString();
+        // Here I can update the selected item maybe
+
+        controllerManager.HighlightSelectedItem(newIndex);
+        controllerManager.UpdateScrollBar(newIndex);
+    }
+
+    public int GetCurrentControllerItemIndex()
+    {
+        return currentControllerItemIndex;
+    }
+
+    public void DecreaseCurrentControllerItemIndex()
+    {
+        //Deal with the index
+        if (currentControllerItemIndex - 1 < 0)
+            currentControllerItemIndex = 0;
+        else
+            currentControllerItemIndex--;
+    }
+
+    public void IncreaseCurrentControllerItemIndex(int itemListLength)
+    {
+        //Deal with the index
+        if (currentControllerItemIndex + 1 > itemListLength - 1)
+            currentControllerItemIndex = itemListLength - 1;
+        else
+            currentControllerItemIndex++;
+    }
 
     #endregion
 
