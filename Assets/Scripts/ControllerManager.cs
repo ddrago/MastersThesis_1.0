@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,10 +19,12 @@ public class ControllerManager : MonoBehaviour
     /*public LogsManager logsManager;
     public ExperimentManager experimentManager;*/
     public Text pseudoConsole;
+    public Scrollbar scrollbar;
 
     //List navigation handling
     private GameObject[] items;
     private int currentItemIndex = 0;
+    private static System.Random rnd = new System.Random();
 
     void OnEnable()
     {
@@ -57,18 +60,28 @@ public class ControllerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scrollbar.value = 1; // At the start, we should see the first element of the list of buttons
+
         //FOR TESTING PURPOSES
         OnStartControllerExperiment();
+        ShuffleTouchscreenMenuItems();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShuffleTouchscreenMenuItems()
+
     {
+        GameObject[] items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems");
 
+        int[] indexList = new int[items.Length]; //.OrderBy(a => rnd.Next()).ToList();
+        for (int i = 0; i < items.Length; i++) indexList[i] = i;
+        indexList = indexList.OrderBy(a => rnd.Next()).ToArray();
+        //GameObject[] countOrdered = count.OrderBy(go => go.name).ToArray();
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].transform.SetSiblingIndex(indexList[i]);
+        }
     }
-
-    public delegate void OnCurrentIndexChangeDelegate(int currentItemIndex);
-    public event OnCurrentIndexChangeDelegate OnCurrentIndexChange;
 
     public void OnStartControllerExperiment()
     {
@@ -87,6 +100,8 @@ public class ControllerManager : MonoBehaviour
         //Debug.Log("Select");
         //pseudoConsole.text = currentItemIndex.ToString();
         pseudoConsole.text = "Select";
+
+        ShuffleTouchscreenMenuItems();
     }
 
     private void MoveUp()

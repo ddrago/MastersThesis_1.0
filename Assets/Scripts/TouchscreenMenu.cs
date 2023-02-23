@@ -8,11 +8,13 @@ public class TouchscreenMenu : MonoBehaviour
 {
     public ExperimentManager experimentManager;
     public Text pseudoConsole;
+    public Scrollbar scrollbar;
 
     private static System.Random rnd = new System.Random();
 
     private void Start()
     {
+        scrollbar.value = 1; // At the start, we should see the first element of the list of buttons
         ShuffleTouchscreenMenuItems();
     }
 
