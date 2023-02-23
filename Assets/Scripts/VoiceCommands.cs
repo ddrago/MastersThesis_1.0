@@ -6,13 +6,17 @@ using UnityEngine;
 
 #if UNITY_STANDALONE_WIN
     using UnityEngine.Windows.Speech;
+#elif UNITY_EDITOR
+    using UnityEngine.Windows.Speech;
 #endif
 
 public class VoiceCommands : MonoBehaviour
 {
-    #if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN
         private KeywordRecognizer keywordRecognizer;
-    #endif
+#elif UNITY_EDITOR
+        private KeywordRecognizer keywordRecognizer;
+#endif
 
 
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
@@ -41,11 +45,15 @@ public class VoiceCommands : MonoBehaviour
         //actions.Add("contacts", Gotit);
         actions.Add("calls", Gotit);
 
-        #if UNITY_STANDALONE_WIN
-            keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
-            keywordRecognizer.OnPhraseRecognized += recognizedPhrase;
-            keywordRecognizer.Start();
-        #endif
+#if UNITY_STANDALONE_WIN
+        keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += recognizedPhrase;
+        keywordRecognizer.Start();
+#elif UNITY_EDITOR
+        keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += recognizedPhrase;
+        keywordRecognizer.Start();
+#endif
 
     }
 
@@ -55,7 +63,7 @@ public class VoiceCommands : MonoBehaviour
 
     }
 
-    #if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
     {
         if (!this.gameObject.activeSelf)
@@ -68,7 +76,20 @@ public class VoiceCommands : MonoBehaviour
         PseudoConsole.text = phrase.text;
         experimentManager.SelectItem(phrase.text.ToLower());
     }
-    #endif
+#elif UNITY_EDITOR
+    private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
+    {
+        if (!this.gameObject.activeSelf)
+        {
+            Debug.Log("Voice commands not active!");
+            return;
+        }
+
+        actions[phrase.text].Invoke();
+        PseudoConsole.text = phrase.text;
+        experimentManager.SelectItem(phrase.text.ToLower());
+    }
+#endif
 
     private void Gotit()
     {
