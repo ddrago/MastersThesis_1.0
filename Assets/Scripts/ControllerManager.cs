@@ -67,6 +67,9 @@ public class ControllerManager : MonoBehaviour
 
     }
 
+    public delegate void OnCurrentIndexChangeDelegate(int currentItemIndex);
+    public event OnCurrentIndexChangeDelegate OnCurrentIndexChange;
+
     public void OnStartControllerExperiment()
     {
         items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems");
@@ -88,6 +91,8 @@ public class ControllerManager : MonoBehaviour
 
     private void MoveUp()
     {
+        //De-select last element selected
+
         if (currentItemIndex - 1 < 0)
             currentItemIndex = 0;
         else
@@ -99,6 +104,7 @@ public class ControllerManager : MonoBehaviour
         //pseudoConsole.text = "Up";
 
         //visual output
+        items[currentItemIndex].GetComponent<Button>().Select();
     }
 
     private void MoveDown()
@@ -117,6 +123,7 @@ public class ControllerManager : MonoBehaviour
         //pseudoConsole.text = "Down";
 
         //visual output
+        items[currentItemIndex].GetComponent<Button>().Select();
 
     }
 
