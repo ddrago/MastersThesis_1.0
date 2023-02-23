@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,13 @@ public class ControllerManager : MonoBehaviour
     public InputAction left;
 
     [Header("Utilities")]
-    public LogsManager logsManager;
-    public ExperimentManager experimentManager;
-    Text PseudoConsole;
+    /*public LogsManager logsManager;
+    public ExperimentManager experimentManager;*/
+    public Text pseudoConsole;
 
+    //List navigation handling
+    private GameObject[] items;
+    private int currentItemIndex = 0;
 
     void OnEnable()
     {
@@ -39,9 +43,12 @@ public class ControllerManager : MonoBehaviour
 
     private void Awake()
     {
-        mid.performed += context => ControlsButtonPress("maps");
+        mid.performed += context => Click();
+        up.performed += context => MoveUp();
+        down.performed += context => MoveDown();
+        /*mid.performed += context => ControlsButtonPress("maps");
         up.performed += context => ControlsButtonPress("calls");
-        down.performed += context => ControlsButtonPress("music");
+        down.performed += context => ControlsButtonPress("music");*/
         right.performed += context => ControlsButtonPress("East");
         left.performed += context => ControlsButtonPress("West");
     }
@@ -50,7 +57,8 @@ public class ControllerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PseudoConsole = GameObject.Find("PseudoConsole").GetComponent<Text>();
+        //FOR TESTING PURPOSES
+        OnStartControllerExperiment();
     }
 
     // Update is called once per frame
@@ -59,12 +67,64 @@ public class ControllerManager : MonoBehaviour
 
     }
 
+    public void OnStartControllerExperiment()
+    {
+        items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems");
+        if (items != null) //This may not work i seem to vaguely recall
+        {
+            Debug.Log(items[currentItemIndex].name);
+            items[currentItemIndex].GetComponent<Button>().Select();
+            //items[currentItemIndex].SetActive(true);
+        }
+    }
+
+    private void Click()
+    {
+        // DEBUG
+        //Debug.Log("Select");
+        //pseudoConsole.text = currentItemIndex.ToString();
+        pseudoConsole.text = "Select";
+    }
+
+    private void MoveUp()
+    {
+        if (currentItemIndex - 1 < 0)
+            currentItemIndex = 0;
+        else
+            currentItemIndex--;
+
+        // DEBUG
+        //Debug.Log("Up");
+        //pseudoConsole.text = currentItemIndex.ToString();
+        //pseudoConsole.text = "Up";
+
+        //visual output
+    }
+
+    private void MoveDown()
+    {
+        if(!(items is null))
+        {
+            if (currentItemIndex + 1 > items.Length-1)
+                currentItemIndex = items.Length - 1;
+            else
+                currentItemIndex++;
+        }
+
+        // DEBUG
+        /*Debug.Log("Down");
+        pseudoConsole.text = currentItemIndex.ToString();*/
+        //pseudoConsole.text = "Down";
+
+        //visual output
+
+    }
 
     void ControlsButtonPress(string item)
     {
-        //Debug.Log(item + " Pressed!");
-        PseudoConsole.text = item;
-        experimentManager.SelectItem(item);
+        Debug.Log(item + " Pressed!");
+        pseudoConsole.text = item;
+        //experimentManager.SelectItem(item);
         //logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
     }
 

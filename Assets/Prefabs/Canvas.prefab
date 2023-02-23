@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4466222961587490477}
   m_Layer: 5
   m_Name: Button (5)
-  m_TagString: TouchscreenMenuSelectableItems
+  m_TagString: ControllerMenuSelectableItems
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 3140577468435879786}
   m_Layer: 5
   m_Name: Button (1)
-  m_TagString: TouchscreenMenuSelectableItems
+  m_TagString: ControllerMenuSelectableItems
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2596,6 +2596,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4225755100027179038}
+        m_TargetAssemblyTypeName: ControllerManager, Assembly-CSharp
+        m_MethodName: OnStartControllerExperiment
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4225755099633148543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,8 +4053,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Left
       m_Flags: 0
-  logsManager: {fileID: 0}
-  experimentManager: {fileID: 4225755100613075029}
+  pseudoConsole: {fileID: 4225755099943920677}
 --- !u!1 &4225755100045192464
 GameObject:
   m_ObjectHideFlags: 0
@@ -5696,7 +5707,7 @@ GameObject:
   - component: {fileID: 2986431912811900525}
   m_Layer: 5
   m_Name: Button (2)
-  m_TagString: TouchscreenMenuSelectableItems
+  m_TagString: ControllerMenuSelectableItems
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5889,7 +5900,7 @@ GameObject:
   - component: {fileID: 9116588201753328052}
   m_Layer: 5
   m_Name: Button
-  m_TagString: TouchscreenMenuSelectableItems
+  m_TagString: ControllerMenuSelectableItems
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6172,7 +6183,7 @@ GameObject:
   - component: {fileID: 7298660970467810728}
   m_Layer: 5
   m_Name: Button (4)
-  m_TagString: TouchscreenMenuSelectableItems
+  m_TagString: ControllerMenuSelectableItems
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6408,7 +6419,7 @@ GameObject:
   - component: {fileID: 7756840841936048729}
   m_Layer: 5
   m_Name: Button (3)
-  m_TagString: TouchscreenMenuSelectableItems
+  m_TagString: ControllerMenuSelectableItems
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
