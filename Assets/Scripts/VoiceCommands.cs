@@ -87,7 +87,7 @@ public class VoiceCommands : MonoBehaviour
 
         actions[phrase.text].Invoke();
         PseudoConsole.text = phrase.text;
-        experimentManager.SelectItem(phrase.text.ToLower());
+        //experimentManager.SelectItem(phrase.text.ToLower());
     }
 #endif
 

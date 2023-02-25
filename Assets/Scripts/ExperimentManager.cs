@@ -43,7 +43,7 @@ public class ExperimentManager : MonoBehaviour
     public void StartExperiment()
     {
         instructionGiver.text = "Loading...";
-        logsManager.LogOnCSV("[START EXPERIMENT]", "N/A", "N/A", true);
+        logsManager.LogOnCSV("[START EXPERIMENT]", "N/A", "N/A", 404, 404, true);
 
         // Set the list of instructions for the participants (for all conditions)
         mirrorUIManager.ServerSetInstructions(index_instructions_to_give, instructionMultiplicationNumber);
@@ -58,16 +58,26 @@ public class ExperimentManager : MonoBehaviour
         // If the condition is either controller or touchscreen, take the string instructions list and
         // randomize it. Then update the name of the buttons on the screen to follow this list in the
         // same order. 
-        mirrorUIManager.ServerSetButtonNames(instructions_to_give);
-        mirrorUIManager.ShuffleButtonNames();
 
-        if (condition.Equals("Touchscreen")) 
-            touchscreenMenu.updateButtonNames(mirrorUIManager.GetButtonNames());
-        else if (condition.Equals("Controller"))
-            controllerManager.updateButtonNames(mirrorUIManager.GetButtonNames());
+        switch (condition)
+        {
+            case "Voice":
+                // Maybe
+                break;
+            case "Touchscreen":
+                touchscreenMenu.OnStartCondition();
+                break;
+            case "Controller":
+                // Maybe
+                break;
+        }
 
-        //logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", true);
-        //TODO: logsManager.LogInstructions(instructions.ToList<string>());
+        //Show the instruction
+        instructionGiver.text = mirrorUIManager.GetInstructions()[currentInstructionItem].ToString();
+        
+        // Log everything
+        logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", 404, 404, true);
+        logsManager.LogInstructions(mirrorUIManager.GetInstructions());
     }
 
     // TODO
@@ -91,7 +101,7 @@ public class ExperimentManager : MonoBehaviour
     {
         studyCurrentlyOngoing = false;
 
-        logsManager.LogOnCSV(string.Format("[END {0} CONDITION]", currentCondition.ToUpper()), "N/A", "N/A", true);
+        logsManager.LogOnCSV(string.Format("[END {0} CONDITION]", currentCondition.ToUpper()), "N/A", "N/A", 404, 404, true);
 
         instructionGiver.text = "Loading...";
 
@@ -118,17 +128,34 @@ public class ExperimentManager : MonoBehaviour
         //GesturesMenu.SetActive(false);
     }
 
-    public void SelectItem(string item)
+    public void SelectItem(string item, int i)
     {
         if (studyCurrentlyOngoing)
         {
-            // User selected the correct item
-            // TODO: REMOVE ToString()!!
-            bool targetItemWasSelected = item.ToLower().Equals(mirrorUIManager.GetInstructions()[currentInstructionItem].ToString().ToLower());
-            Debug.Log(string.Format("item: {0}, target: {1}, isCorrect: {2}", item, mirrorUIManager.GetInstructions()[currentInstructionItem], targetItemWasSelected));
-            logsManager.LogOnCSV(string.Format("[{0}]", currentCondition.ToUpper()), item, mirrorUIManager.GetInstructions()[currentInstructionItem].ToString(), targetItemWasSelected);
+            bool targetItemWasSelected = i == mirrorUIManager.GetInstructions()[currentInstructionItem];
+
+            Debug.Log(string.Format("item: {0}, target: {1}, index: {2}, targetIndex: {3}, isCorrect: {4}", 
+                item, 
+                "TODO", 
+                i, 
+                mirrorUIManager.GetInstructions()[currentInstructionItem], 
+                targetItemWasSelected));
+            
+            logsManager.LogOnCSV(
+                string.Format("[{0}]", currentCondition.ToUpper()), 
+                item, 
+                "TODO", 
+                i, 
+                mirrorUIManager.GetInstructions()[currentInstructionItem], 
+                targetItemWasSelected);
+            
             NextInstruction();
         }
         else Debug.Log("WARNING: Before providing input, please select a condition.");
+    }
+
+    public List<string> GetCopyOfInstructionNames()
+    {
+        return new List<string>(instructions_to_give);
     }
 }

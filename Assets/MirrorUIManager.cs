@@ -42,7 +42,7 @@ public class MirrorUIManager : NetworkBehaviour
     // Useful variables
     //public readonly SyncList<string> instructions = new SyncList<string>();
     public readonly SyncList<int> instructions = new SyncList<int>();
-    public readonly SyncList<string> button_names = new SyncList<string>();
+    public readonly SyncList<string> buttonNames = new SyncList<string>();
 
     [SyncVar(hook = nameof(UpdateCurrentControllerItemIndex))]
     public int currentControllerItemIndex = 0;
@@ -50,7 +50,7 @@ public class MirrorUIManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        buttonNames.Callback += OnButtonNamesChanged;
     }
 
     // Update is called once per frame
@@ -266,6 +266,33 @@ public class MirrorUIManager : NetworkBehaviour
 
     #region Instructions
 
+    private void OnButtonNamesChanged(SyncList<string>.Operation op, int itemIndex, string oldItem, string newItem)
+    {
+        switch (op)
+        {
+            case SyncList<string>.Operation.OP_ADD:
+                // index is where it was added into the list
+                // newItem is the new item
+                break;
+            case SyncList<string>.Operation.OP_INSERT:
+                // index is where it was inserted into the list
+                // newItem is the new item
+                break;
+            case SyncList<string>.Operation.OP_REMOVEAT:
+                // index is where it was removed from the list
+                // oldItem is the item that was removed
+                break;
+            case SyncList<string>.Operation.OP_SET:
+                // index is of the item that was changed
+                // oldItem is the previous value for the item at the index
+                // newItem is the new value for the item at the index
+                break;
+            case SyncList<string>.Operation.OP_CLEAR:
+                // list got cleared
+                break;
+        }
+    }
+
     [ServerCallback]
     //public void ServerSetInstructions(List<string> longer_instruction_list, Text instructionGiver, int currentInstructionItem, string condition)
     public void ServerSetInstructions(List<int> index_instructions_to_give, int instructionMultiplicationNumber)
@@ -293,33 +320,33 @@ public class MirrorUIManager : NetworkBehaviour
         return instructions.ToList<int>();
     }
 
-    [ServerCallback]
+    [ClientCallback]
+    [Command(requiresAuthority = false)]
     // Button names section
-    public void ServerSetButtonNames(List<string> names)
+    public void CmdSetButtonNames(List<string> names)
     {
-        if (button_names != null)
+        if (buttonNames != null)
         {
-            button_names.Clear();
-            button_names.AddRange(names);
+            buttonNames.Clear();
+            buttonNames.AddRange(names);
         }
     }
 
-    [ServerCallback]
-    public void ShuffleButtonNames()
+    [ClientCallback]
+    [Command(requiresAuthority = false)]
+    public void CmdShuffleButtonNames()
     {
-        if(button_names!=null) 
+        if(buttonNames!=null)
         {
-            List<string> temp = button_names.OrderBy(a => rnd.Next()).ToList();
-            button_names.Clear();
-            button_names.AddRange(temp);
+            List<string> temp = buttonNames.OrderBy(a => rnd.Next()).ToList();
+            buttonNames.Clear();
+            buttonNames.AddRange(temp);
         }
-
-
     }
 
     public List<string> GetButtonNames()
     {
-        return button_names.ToList();
+        return buttonNames.ToList();
     }
 
     /*

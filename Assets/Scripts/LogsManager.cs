@@ -46,8 +46,8 @@ public class LogsManager : MonoBehaviour
         Debug.Log(filename);
 
         System.IO.File.WriteAllLines(filename, new string[] {
-            "InteractionType,Time,TimeMS,Item,itemToSelect,isCorrectItem",
-            "[INIT]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A"
+            "InteractionType,Time,TimeMS,Item,ItemToSelect,ItemIndex,IsCorrectItem",
+            "[INIT]" + "," + DateTime.Now.ToString() + "," + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + "," + "N/A" + "," + "N/A" + "," + "N/A" + "," + "N/A" + "," + "N/A"
         });
 
         // Log the gaze path directional data
@@ -57,10 +57,10 @@ public class LogsManager : MonoBehaviour
         });
     }
 
-    public void LogOnCSV(string interactionType, string item, string targetItem, bool isCorrectItem)
+    public void LogOnCSV(string interactionType, string item, string targetItem, int itemIndex, int targetItemIndex, bool isCorrectItem)
     {
         System.IO.File.AppendAllLines(filename, new string[] {
-            interactionType + "," + DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + item + "," + targetItem + "," + isCorrectItem
+            interactionType + "," + DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + item + "," + targetItem + "," + itemIndex + "," + targetItemIndex + "," + isCorrectItem
         });
     }
 
@@ -71,7 +71,7 @@ public class LogsManager : MonoBehaviour
         });
     }
 
-    public void LogInstructions(List<string> instructions)
+    public void LogInstructions(List<int> instructions)
     {
         // TODO make a bit more indicative than just instructions.txt
         //instruction_log_filename = currentInputMethod + "_" + "instructions.txt";
