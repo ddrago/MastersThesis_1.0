@@ -14,50 +14,39 @@ public class ExperimentManager : MonoBehaviour
     public LogsManager logsManager;
     public Text instructionGiver;
     public MirrorUIManager mirrorUIManager;
+    public TouchscreenMenu touchscreenMenu;
+    public ControllerManager controllerManager;
 
     [Header("Menu Manager")]
     public GameObject VoiceConditionButton;
     public GameObject TouchscreenConditionButton;
     public GameObject ControllerConditionButton;
-    public GameObject GesturesConditionButton;
+    //public GameObject GesturesConditionButton;
     public GameObject MainMenu;
     public GameObject VoiceMenu;
     public GameObject TouchscreenMenu;
     public GameObject ControllerMenu;
-    public GameObject GesturesMenu;
+    //public GameObject GesturesMenu;
 
     // TODO: update with better instructions if necessary
-    private static List<string> instructions_to_give = new List<string>(new string[] { "music", "calls", "maps", "news", "weather", "terrain" });
+    private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "Calls", "Maps", "News", "Weather", "Terrain" });
+    private static List<int> index_instructions_to_give = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
     private string next_instruction;
-
-    private static System.Random rnd = new System.Random();
 
     // Mid-study variables
     private int currentInstructionItem = 0;
     private string currentCondition;
     private bool studyCurrentlyOngoing = false;
 
-    private void Awake()
-    {
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private static System.Random rnd = new System.Random();
 
     public void StartExperiment()
     {
         instructionGiver.text = "Loading...";
         logsManager.LogOnCSV("[START EXPERIMENT]", "N/A", "N/A", true);
+
+        // Set the list of instructions for the participants (for all conditions)
+        mirrorUIManager.ServerSetInstructions(index_instructions_to_give, instructionMultiplicationNumber);
     }
 
     public void StartCondition(string condition)
@@ -66,31 +55,22 @@ public class ExperimentManager : MonoBehaviour
         currentCondition = condition;
         studyCurrentlyOngoing = true;
 
-        // TODO: will need to multiplicate the instructions (2, 3 or 4 times?)
-        List<string> longer_instruction_list = new List<string>();
-        for(int i = 0; i < instructionMultiplicationNumber; i++)
-        {
-            longer_instruction_list.AddRange(instructions_to_give);
-        }
+        // If the condition is either controller or touchscreen, take the string instructions list and
+        // randomize it. Then update the name of the buttons on the screen to follow this list in the
+        // same order. 
+        mirrorUIManager.ServerSetButtonNames(instructions_to_give);
+        mirrorUIManager.ShuffleButtonNames();
 
-        mirrorUIManager.ServerSetInstructions(longer_instruction_list,
-                                              instructionGiver,
-                                              currentInstructionItem,
-                                              condition);
-        /*
-        instructions.Clear();
-        instructions.AddRange(longer_instruction_list.OrderBy(a => rnd.Next()).ToList());
+        if (condition.Equals("Touchscreen")) 
+            touchscreenMenu.updateButtonNames(mirrorUIManager.GetButtonNames());
+        else if (condition.Equals("Controller"))
+            controllerManager.updateButtonNames(mirrorUIManager.GetButtonNames());
 
-        instructionGiver.text = instructions[currentInstructionItem];
-        Debug.Log("SERVER: " + instructions[currentInstructionItem]);
-        TargetUpdateInstructionGiver(instructions[currentInstructionItem]);
-        //NextInstruction();
-
-        logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", true);
-        logsManager.LogInstructions(instructions.ToList<string>());
-        */
+        //logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", true);
+        //TODO: logsManager.LogInstructions(instructions.ToList<string>());
     }
 
+    // TODO
     public void updateInstructionGiver(string instruction)
     {
         instructionGiver.text = instruction;
@@ -100,11 +80,9 @@ public class ExperimentManager : MonoBehaviour
     {
         currentInstructionItem += 1;
 
-        //Debug.Log("i: " + currentInstructionItem + "count: " + instructions.Count);
-
         if (currentInstructionItem < mirrorUIManager.GetInstructions().Count)
         {
-            instructionGiver.text = mirrorUIManager.GetInstructions()[currentInstructionItem];
+            instructionGiver.text = mirrorUIManager.GetInstructions()[currentInstructionItem].ToString();
         }
         else EndCondition();
     }
@@ -125,7 +103,7 @@ public class ExperimentManager : MonoBehaviour
         VoiceConditionButton.GetComponent<Button>().interactable = status;
         TouchscreenConditionButton.GetComponent<Button>().interactable = status;
         ControllerConditionButton.GetComponent<Button>().interactable = status;
-        GesturesConditionButton.GetComponent<Button>().interactable = status;
+        //GesturesConditionButton.GetComponent<Button>().interactable = status;
     }
 
     public void GoBackToMainMenu()
@@ -137,7 +115,7 @@ public class ExperimentManager : MonoBehaviour
         VoiceMenu.SetActive(false);
         TouchscreenMenu.SetActive(false);
         ControllerMenu.SetActive(false);
-        GesturesMenu.SetActive(false);
+        //GesturesMenu.SetActive(false);
     }
 
     public void SelectItem(string item)
@@ -145,9 +123,10 @@ public class ExperimentManager : MonoBehaviour
         if (studyCurrentlyOngoing)
         {
             // User selected the correct item
-            bool targetItemWasSelected = item.ToLower().Equals(mirrorUIManager.GetInstructions()[currentInstructionItem].ToLower());
+            // TODO: REMOVE ToString()!!
+            bool targetItemWasSelected = item.ToLower().Equals(mirrorUIManager.GetInstructions()[currentInstructionItem].ToString().ToLower());
             Debug.Log(string.Format("item: {0}, target: {1}, isCorrect: {2}", item, mirrorUIManager.GetInstructions()[currentInstructionItem], targetItemWasSelected));
-            logsManager.LogOnCSV(string.Format("[{0}]", currentCondition.ToUpper()), item, mirrorUIManager.GetInstructions()[currentInstructionItem], targetItemWasSelected);
+            logsManager.LogOnCSV(string.Format("[{0}]", currentCondition.ToUpper()), item, mirrorUIManager.GetInstructions()[currentInstructionItem].ToString(), targetItemWasSelected);
             NextInstruction();
         }
         else Debug.Log("WARNING: Before providing input, please select a condition.");

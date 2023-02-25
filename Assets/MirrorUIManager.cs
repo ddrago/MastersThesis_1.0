@@ -40,7 +40,9 @@ public class MirrorUIManager : NetworkBehaviour
     public ControllerManager controllerManager;
 
     // Useful variables
-    public readonly SyncList<string> instructions = new SyncList<string>();
+    //public readonly SyncList<string> instructions = new SyncList<string>();
+    public readonly SyncList<int> instructions = new SyncList<int>();
+    public readonly SyncList<string> button_names = new SyncList<string>();
 
     [SyncVar(hook = nameof(UpdateCurrentControllerItemIndex))]
     public int currentControllerItemIndex = 0;
@@ -265,19 +267,17 @@ public class MirrorUIManager : NetworkBehaviour
     #region Instructions
 
     [ServerCallback]
-    public void ServerSetInstructions(List<string> longer_instruction_list, Text instructionGiver, int currentInstructionItem, string condition)
+    //public void ServerSetInstructions(List<string> longer_instruction_list, Text instructionGiver, int currentInstructionItem, string condition)
+    public void ServerSetInstructions(List<int> index_instructions_to_give, int instructionMultiplicationNumber)
     {
         instructions.Clear();
-        instructions.AddRange(longer_instruction_list.OrderBy(a => rnd.Next()).ToList());
 
-        instructionGiver.text = instructions[currentInstructionItem];
-        Debug.Log("SERVER: " + instructions[currentInstructionItem]);
-        RpcUpdateInstructions(instructions[currentInstructionItem]);
-        //TargetUpdateInstructionGiver(instructions[currentInstructionItem], instructionGiver);
-        //NextInstruction();
-
-        logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", true);
-        logsManager.LogInstructions(instructions.ToList<string>());
+        List<int> longer_index_instruction_list = new List<int>();
+        for (int i = 0; i < instructionMultiplicationNumber; i++)
+        {
+            longer_index_instruction_list.AddRange(index_instructions_to_give);
+        }
+        instructions.AddRange(longer_index_instruction_list.OrderBy(a => rnd.Next()).ToList());
     }
 
     [ClientRpc]
@@ -288,9 +288,38 @@ public class MirrorUIManager : NetworkBehaviour
         Debug.Log("CLIENT: " + instruction);
     }
 
-    public List<string> GetInstructions()
+    public List<int> GetInstructions()
     {
-        return instructions.ToList<string>();
+        return instructions.ToList<int>();
+    }
+
+    [ServerCallback]
+    // Button names section
+    public void ServerSetButtonNames(List<string> names)
+    {
+        if (button_names != null)
+        {
+            button_names.Clear();
+            button_names.AddRange(names);
+        }
+    }
+
+    [ServerCallback]
+    public void ShuffleButtonNames()
+    {
+        if(button_names!=null) 
+        {
+            List<string> temp = button_names.OrderBy(a => rnd.Next()).ToList();
+            button_names.Clear();
+            button_names.AddRange(temp);
+        }
+
+
+    }
+
+    public List<string> GetButtonNames()
+    {
+        return button_names.ToList();
     }
 
     /*

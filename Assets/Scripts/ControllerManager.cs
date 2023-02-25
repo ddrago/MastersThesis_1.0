@@ -47,14 +47,14 @@ public class ControllerManager : MonoBehaviour
 
     private void Awake()
     {
-        mid.performed += context => Click();
+        mid.performed += context => ControlsButtonPress();
         up.performed += context => MoveUp();
         down.performed += context => MoveDown();
         /*mid.performed += context => ControlsButtonPress("maps");
         up.performed += context => ControlsButtonPress("calls");
         down.performed += context => ControlsButtonPress("music");*/
-        right.performed += context => ControlsButtonPress("East");
-        left.performed += context => ControlsButtonPress("West");
+        right.performed += context => ControlsButtonPress();
+        left.performed += context => ControlsButtonPress();
     }
 
 
@@ -65,7 +65,7 @@ public class ControllerManager : MonoBehaviour
         scrollbar.value = 1; // At the start, we should see the first element of the list of buttons
 
         //FOR TESTING PURPOSES
-        //OnStartControllerExperiment();
+        OnStartControllerExperiment();
         //ShuffleTouchscreenMenuItems();
     }
 
@@ -93,51 +93,37 @@ public class ControllerManager : MonoBehaviour
         if (items != null) items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponent<Button>().Select();
     }
 
-    private void Click()
+    void ControlsButtonPress()
     {
-        // DEBUG
-        //Debug.Log("Select");
-        //pseudoConsole.text = currentItemIndex.ToString();
         pseudoConsole.text = "Select";
+        
+        if (items is null) return;
 
-        //ShuffleTouchscreenMenuItems();
+        pseudoConsole.text = items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponentInChildren<Text>().text;
+        //experimentManager.SelectItem(item);
+        //logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
     }
 
     private void MoveUp()
     {
-        if (!(items is null))
-        {
-            mirrorUIManager.DecreaseCurrentControllerItemIndex();
-
-/*                //Deal with the scrollbar
-                if (scrollbar.value >= 1)
-                    scrollbar.value = 1;
-                else
-                    scrollbar.value = scrollbar.value + (1f / (float)(items.Length - 1));*/
-                UpdateScrollBar(mirrorUIManager.GetCurrentControllerItemIndex());
-        }
+        if (items is null) return;
+    
+        mirrorUIManager.DecreaseCurrentControllerItemIndex();
 
         //visual output
         items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponent<Button>().Select();
+        UpdateScrollBar(mirrorUIManager.GetCurrentControllerItemIndex());
     }
 
     private void MoveDown()
     {
-        if(!(items is null))
-        {
-            mirrorUIManager.IncreaseCurrentControllerItemIndex(items.Length);
-
-                /*//Deal with the scrollbar
-                if (scrollbar.value <= 0)
-                    scrollbar.value = 0;
-                else
-                    scrollbar.value = scrollbar.value - (1f / (float)(items.Length - 1));*/
-
-                UpdateScrollBar(mirrorUIManager.GetCurrentControllerItemIndex());
-        }
+        if (items is null) return;
+       
+        mirrorUIManager.IncreaseCurrentControllerItemIndex(items.Length);
 
         //visual output
         items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponent<Button>().Select();
+        UpdateScrollBar(mirrorUIManager.GetCurrentControllerItemIndex());
     }
 
     public void HighlightSelectedItem(int index)
@@ -150,12 +136,19 @@ public class ControllerManager : MonoBehaviour
         if (scrollbar != null) scrollbar.value = 1f - index / 5f;
     }
 
-    void ControlsButtonPress(string item)
+    internal void updateButtonNames(List<string> button_names)
     {
-        Debug.Log(item + " Pressed!");
-        pseudoConsole.text = item;
-        //experimentManager.SelectItem(item);
-        //logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
+        GameObject[] items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems");
+        if (items.Length != button_names.Count)
+        {
+            Debug.LogError("The two lists do not have the same amount of items!!");
+            return;
+        }
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].GetComponentInChildren<Text>().text = button_names[i];
+        }
     }
 
     public class AlphanumComparatorFast : IComparer<string>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ public class TouchscreenMenu : MonoBehaviour
     private void Start()
     {
         scrollbar.value = 1; // At the start, we should see the first element of the list of buttons
-        ShuffleTouchscreenMenuItems();
+        //ShuffleTouchscreenMenuItems();
     }
 
     public void ShuffleTouchscreenMenuItems()
@@ -40,24 +41,18 @@ public class TouchscreenMenu : MonoBehaviour
         experimentManager.SelectItem(item);
     }
 
-    // Mirror stuff
-    /*
-    private bool button1IsPressed = false;
-    public void PressButton1()
+    internal void updateButtonNames(List<string> button_names)
     {
-        button1IsPressed = true;
-    }
-
-    public bool getButton1IsPressed()
-    {
-        if (button1IsPressed)
-        {
-            button1IsPressed = false;
-            return true;
+        GameObject[] items = GameObject.FindGameObjectsWithTag("TouchscreenMenuSelectableItems");
+        if (items.Length != button_names.Count) {
+            Debug.LogError("The two lists do not have the same amount of items!!" + 
+                string.Format("\nitems is {0} items long, button_names is {1}.", items.Length, button_names.Count));
+            return;
         }
 
-        return false;
-    }*/
-
-
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].GetComponentInChildren<Text>().text = button_names[i];
+        }
+    }
 }
