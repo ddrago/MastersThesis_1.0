@@ -73,7 +73,7 @@ public class ExperimentManager : MonoBehaviour
         }
 
         //Show the instruction
-        instructionGiver.text = mirrorUIManager.GetInstructions()[currentInstructionItem].ToString();
+        instructionGiver.text = getCurrentInstruction().ToString();
         
         // Log everything
         logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", 404, 404, true);
@@ -92,7 +92,7 @@ public class ExperimentManager : MonoBehaviour
 
         if (currentInstructionItem < mirrorUIManager.GetInstructions().Count)
         {
-            instructionGiver.text = mirrorUIManager.GetInstructions()[currentInstructionItem].ToString();
+            instructionGiver.text = getCurrentInstruction().ToString();
         }
         else EndCondition();
     }
@@ -128,31 +128,63 @@ public class ExperimentManager : MonoBehaviour
         //GesturesMenu.SetActive(false);
     }
 
-    public void SelectItem(string item, int i)
+    public void SelectItem(string item, string targetItem, int i)
     {
         if (studyCurrentlyOngoing)
         {
-            bool targetItemWasSelected = i == mirrorUIManager.GetInstructions()[currentInstructionItem];
+            bool targetItemWasSelected = i == getCurrentInstruction();
 
             Debug.Log(string.Format("item: {0}, target: {1}, index: {2}, targetIndex: {3}, isCorrect: {4}", 
-                item, 
-                "TODO", 
+                item,
+                targetItem, 
                 i, 
-                mirrorUIManager.GetInstructions()[currentInstructionItem], 
+                getCurrentInstruction(), 
                 targetItemWasSelected));
             
             logsManager.LogOnCSV(
                 string.Format("[{0}]", currentCondition.ToUpper()), 
-                item, 
-                "TODO", 
+                item,
+                targetItem, 
                 i, 
-                mirrorUIManager.GetInstructions()[currentInstructionItem], 
+                getCurrentInstruction(), 
                 targetItemWasSelected);
             
             NextInstruction();
         }
         else Debug.Log("WARNING: Before providing input, please select a condition.");
     }
+
+    public int getCurrentInstruction()
+    {
+        return mirrorUIManager.GetInstructions()[currentInstructionItem];
+    }
+
+    //TODO
+    /*public void SelectItemVoiceCondition(string item)
+    {
+        if (studyCurrentlyOngoing)
+        {
+            bool targetItemWasSelected = i == mirrorUIManager.GetInstructions()[currentInstructionItem];
+
+            Debug.Log(string.Format("item: {0}, target: {1}, index: {2}, targetIndex: {3}, isCorrect: {4}",
+                item,
+                buttonNames[mirrorUIManager.GetInstructions()[currentInstructionItem]],
+                i,
+                mirrorUIManager.GetInstructions()[currentInstructionItem],
+                targetItemWasSelected));
+
+            logsManager.LogOnCSV(
+                string.Format("[{0}]", currentCondition.ToUpper()),
+                item,
+                buttonNames[mirrorUIManager.GetInstructions()[currentInstructionItem]],
+                i,
+                mirrorUIManager.GetInstructions()[currentInstructionItem],
+                targetItemWasSelected);
+
+            NextInstruction();
+        }
+        else Debug.Log("WARNING: Before providing input, please select a condition.");
+    }*/
 
     public List<string> GetCopyOfInstructionNames()
     {

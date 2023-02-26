@@ -25,7 +25,6 @@ public class TouchscreenMenu : MonoBehaviour
     }
 
     public void ShuffleTouchscreenMenuItems()
-
     {
         GameObject[] items = GameObject.FindGameObjectsWithTag("TouchscreenMenuSelectableItems")
             .OrderBy(obj => obj.name, new AlphanumComparatorFast())
@@ -48,14 +47,22 @@ public class TouchscreenMenu : MonoBehaviour
             .OrderBy(obj => obj.name, new AlphanumComparatorFast())
             .ToArray<GameObject>();
 
-        int i = 0;
+        int i = -1;
         if (items.Contains<GameObject>(go))
             i = System.Array.IndexOf(items, go);
         else
-            Debug.LogError("ERROR: either button items were not retrieved or index out of scope somehow");
+        {
+            Debug.LogError("ERROR: either button items were not retrieved or button name not correct");
+            return;
+        }
 
         pseudoConsole.text = go.gameObject.GetComponentInChildren<Text>().text;
-        experimentManager.SelectItem(go.gameObject.GetComponentInChildren<Text>().text, i);
+        experimentManager.SelectItem(
+            go.gameObject.GetComponentInChildren<Text>().text,
+            items[experimentManager.getCurrentInstruction()].GetComponentInChildren<Text>().text,
+            i);
+
+        ShuffleTouchscreenMenuItems();
     }
 
     internal void UpdateButtonNames(List<string> button_names)
