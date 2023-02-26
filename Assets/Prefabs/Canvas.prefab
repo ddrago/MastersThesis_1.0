@@ -121,9 +121,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: ShuffleTouchscreenMenuItems
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton5
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -133,21 +133,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: buttonPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: terrain
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4225755098943772899}
-        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
-        m_MethodName: OnTouchscreenButton5
+      - m_Target: {fileID: 4225755100027179038}
+        m_TargetAssemblyTypeName: ControllerManager, Assembly-CSharp
+        m_MethodName: ControlsButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -278,9 +266,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: ShuffleTouchscreenMenuItems
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -290,21 +278,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: buttonPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: music
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4225755098943772899}
-        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
-        m_MethodName: OnTouchscreenButton1
+      - m_Target: {fileID: 4225755100027179038}
+        m_TargetAssemblyTypeName: ControllerManager, Assembly-CSharp
+        m_MethodName: ControlsButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3645,6 +3621,7 @@ MonoBehaviour:
   pseudoConsole: {fileID: 4225755099943920677}
   scrollbar: {fileID: 6957681984433809137}
   mirrorUIManager: {fileID: 4225755098943772899}
+  experimentManager: {fileID: 4225755100613075029}
 --- !u!1 &4225755100045192464
 GameObject:
   m_ObjectHideFlags: 0
@@ -4937,6 +4914,7 @@ MonoBehaviour:
   VoiceMenu: {fileID: 4225755100471203993}
   TouchscreenMenu: {fileID: 4225755099041569353}
   ControllerMenu: {fileID: 4225755100027179032}
+  studyCurrentlyOngoing: 0
 --- !u!1 &5000178161015652112
 GameObject:
   m_ObjectHideFlags: 0
@@ -5133,9 +5111,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: ShuffleTouchscreenMenuItems
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5145,21 +5123,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: buttonPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: news
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4225755098943772899}
-        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
-        m_MethodName: OnTouchscreenButton2
+      - m_Target: {fileID: 4225755100027179038}
+        m_TargetAssemblyTypeName: ControllerManager, Assembly-CSharp
+        m_MethodName: ControlsButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5326,9 +5292,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: ShuffleTouchscreenMenuItems
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton0
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5338,21 +5304,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: buttonPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: maps
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4225755098943772899}
-        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
-        m_MethodName: OnTouchscreenButton0
+      - m_Target: {fileID: 4225755100027179038}
+        m_TargetAssemblyTypeName: ControllerManager, Assembly-CSharp
+        m_MethodName: ControlsButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5609,9 +5563,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: ShuffleTouchscreenMenuItems
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5621,21 +5575,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: buttonPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: weather
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4225755098943772899}
-        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
-        m_MethodName: OnTouchscreenButton4
+      - m_Target: {fileID: 4225755100027179038}
+        m_TargetAssemblyTypeName: ControllerManager, Assembly-CSharp
+        m_MethodName: ControlsButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5845,9 +5787,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: ShuffleTouchscreenMenuItems
+      - m_Target: {fileID: 4225755098943772899}
+        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
+        m_MethodName: OnTouchscreenButton3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5857,21 +5799,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4225755099041569359}
-        m_TargetAssemblyTypeName: TouchscreenMenu, Assembly-CSharp
-        m_MethodName: buttonPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: calls
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4225755098943772899}
-        m_TargetAssemblyTypeName: MirrorUIManager, Assembly-CSharp
-        m_MethodName: OnTouchscreenButton3
+      - m_Target: {fileID: 4225755100027179038}
+        m_TargetAssemblyTypeName: ControllerManager, Assembly-CSharp
+        m_MethodName: ControlsButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

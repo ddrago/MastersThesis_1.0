@@ -21,6 +21,7 @@ public class ControllerManager : MonoBehaviour
     public Text pseudoConsole;
     public Scrollbar scrollbar;
     public MirrorUIManager mirrorUIManager;
+    public ExperimentManager experimentManager;
 
     //List navigation handling
     private GameObject[] items;
@@ -63,29 +64,12 @@ public class ControllerManager : MonoBehaviour
     {
         scrollbar.gameObject.SetActive(true);
         scrollbar.value = 1; // At the start, we should see the first element of the list of buttons
-
-        //FOR TESTING PURPOSES
-        OnStartControllerExperiment();
-        //ShuffleTouchscreenMenuItems();
     }
 
-    public void ShuffleControllerMenuItems()
+    public void OnStartCondition()
     {
-        GameObject[] items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems");
+        ShuffleControllerMenuItems();
 
-        int[] indexList = new int[items.Length]; //.OrderBy(a => rnd.Next()).ToList();
-        for (int i = 0; i < items.Length; i++) indexList[i] = i;
-        indexList = indexList.OrderBy(a => rnd.Next()).ToArray();
-        //GameObject[] countOrdered = count.OrderBy(go => go.name).ToArray();
-
-        for (int i = 0; i < items.Length; i++)
-        {
-            items[i].transform.SetSiblingIndex(indexList[i]);
-        }
-    }
-
-    public void OnStartControllerExperiment()
-    {
         items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems")
                     .OrderBy(obj => obj.name, new AlphanumComparatorFast())
                     .ToArray<GameObject>();
@@ -93,15 +77,49 @@ public class ControllerManager : MonoBehaviour
         if (items != null) items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponent<Button>().Select();
     }
 
-    void ControlsButtonPress()
+    public void ShuffleControllerMenuItems()
     {
-        pseudoConsole.text = "Select";
-        
+        if (experimentManager.studyCurrentlyOngoing)
+        {
+            if (items == null) return;
+
+            //TODO we want to randomly assign one of the six possible button names from a copied list of the names
+            List<string> names = experimentManager.GetCopyOfInstructionNames().OrderBy(a => rnd.Next()).ToList();
+
+            // assign one of its string elements to each items text
+            if (names.Count != items.Length)
+                Debug.LogError(string.Format("In ShuffleTouchscreenMenuItems: different number of buttons ({0}) and respective names! ({1})", items.Length, names.Count));
+            else
+                for (int i = 0; i < names.Count; i++)
+                    items[i].GetComponentInChildren<Text>().text = names[i];
+        }
+    }
+
+    public string GetInstructionCorrespondingToIndex(int currentInstructionIndex)
+    {
+        if (items == null) return "ERROR";
+
+        return items[currentInstructionIndex].GetComponentInChildren<Text>().text;
+    }
+
+    public void ControlsButtonPress()
+    {
         if (items is null) return;
 
-        pseudoConsole.text = items[mirrorUIManager.GetCurrentControllerItemIndex()].GetComponentInChildren<Text>().text;
-        //experimentManager.SelectItem(item);
-        //logsManager.LogOnCSV("[REMOTE]", buttonName, "-", true);
+        mirrorUIManager.RpcControlsButtonPress();
+
+        int i = mirrorUIManager.GetCurrentControllerItemIndex();
+        string itemSelected = items[i].GetComponentInChildren<Text>().text;
+
+        pseudoConsole.text = itemSelected;
+
+        experimentManager.SelectItem(
+            itemSelected,
+            items[experimentManager.getCurrentInstruction()].GetComponentInChildren<Text>().text,
+            i);
+
+        ShuffleControllerMenuItems();
+        experimentManager.NextInstruction();
     }
 
     private void MoveUp()

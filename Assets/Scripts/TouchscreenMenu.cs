@@ -31,17 +31,6 @@ public class TouchscreenMenu : MonoBehaviour
             .OrderBy(obj => obj.name, new AlphanumComparatorFast())
             .ToArray();
 
-        Debug.Log("Index in TouchscreenMenu: " + currentInstructionIndex.ToString());
-        Debug.Log("Instruction in Touchscreen: " + items[experimentManager.getCurrentInstruction()].GetComponentInChildren<Text>().text);
-
-
-        /*for (int j = 0; j < items.Length; j++)
-            Debug.Log(items[j].GetComponentInChildren<Text>().text);
-
-        Debug.Log(string.Format("TargetIndex?: {0}, TargetButton?: {1}", 
-            currentInstructionIndex, // This is right
-            items[currentInstructionIndex].GetComponentInChildren<Text>().text));*/ //This shit is wrong somehow. 
-
         return items[currentInstructionIndex].GetComponentInChildren<Text>().text;
     }
 

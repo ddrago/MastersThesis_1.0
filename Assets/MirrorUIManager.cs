@@ -396,6 +396,12 @@ public class MirrorUIManager : NetworkBehaviour
             currentControllerItemIndex++;
     }
 
+    [ClientRpc]
+    public void RpcControlsButtonPress()
+    {
+        controllerManager.ControlsButtonPress();
+    }
+
     #endregion
 
     #region tiltLogging

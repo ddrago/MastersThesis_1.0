@@ -28,7 +28,6 @@ public class ExperimentManager : MonoBehaviour
     public GameObject ControllerMenu;
     //public GameObject GesturesMenu;
 
-    // TODO: update with better instructions if necessary
     private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "Calls", "Maps", "News", "Weather", "Terrain" });
     private static List<int> index_instructions_to_give = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
     private string next_instruction;
@@ -69,20 +68,19 @@ public class ExperimentManager : MonoBehaviour
                 next_instruction = touchscreenMenu.GetInstructionCorrespondingToIndex(getCurrentInstruction());
                 break;
             case "Controller":
-                // Maybe
+                controllerManager.OnStartCondition();
+                next_instruction = controllerManager.GetInstructionCorrespondingToIndex(getCurrentInstruction());
                 break;
         }
 
         //Show the instruction 
         UpdateInstructionGiver(next_instruction);
-        //UpdateInstructionGiver(getCurrentInstruction().ToString());
         
         // Log everything
         logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", 404, 404, true);
         logsManager.LogInstructions(mirrorUIManager.GetInstructions());
     }
 
-    // TODO
     public void UpdateInstructionGiver(string instruction)
     {
         instructionGiver.text = instruction;
@@ -103,14 +101,11 @@ public class ExperimentManager : MonoBehaviour
                     next_instruction = touchscreenMenu.GetInstructionCorrespondingToIndex(getCurrentInstruction());
                     break;
                 case "Controller":
-                    // Maybe
+                    next_instruction = controllerManager.GetInstructionCorrespondingToIndex(getCurrentInstruction());
                     break;
             }
 
             UpdateInstructionGiver(next_instruction);
-            //Debug.Log("Next instruction:" + next_instruction);
-            //instructionGiver.text = next_instruction;
-            //instructionGiver.text = getCurrentInstruction().ToString();
         }
         else EndCondition();
     }
