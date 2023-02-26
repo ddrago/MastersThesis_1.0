@@ -45,7 +45,7 @@ public class ExperimentManager : MonoBehaviour
         logsManager.LogOnCSV("[START EXPERIMENT]", "N/A", "N/A", 404, 404, true);
 
         // Set the list of instructions for the participants (for all conditions)
-        mirrorUIManager.ServerSetInstructions(index_instructions_to_give, instructionMultiplicationNumber);
+        mirrorUIManager.ServerSetInstructions(index_instructions_to_give, instructions_to_give, instructionMultiplicationNumber);
     }
 
     public void StartCondition(string condition)
@@ -95,7 +95,7 @@ public class ExperimentManager : MonoBehaviour
             switch (currentCondition)
             {
                 case "Voice":
-                    // Maybe
+                    next_instruction = "TODO";
                     break;
                 case "Touchscreen":
                     next_instruction = touchscreenMenu.GetInstructionCorrespondingToIndex(getCurrentInstruction());
