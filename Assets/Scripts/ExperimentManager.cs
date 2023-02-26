@@ -61,7 +61,7 @@ public class ExperimentManager : MonoBehaviour
         switch (condition)
         {
             case "Voice":
-                next_instruction = mirrorUIManager.GetVoiceInstructions()[getCurrentInstruction()];
+                next_instruction = mirrorUIManager.GetVoiceInstructions()[turnNumber];
                 break;
             case "Touchscreen":
                 touchscreenMenu.OnStartCondition();
@@ -101,7 +101,7 @@ public class ExperimentManager : MonoBehaviour
             switch (currentCondition)
             {
                 case "Voice":
-                    next_instruction = mirrorUIManager.GetVoiceInstructions()[getCurrentInstruction()];
+                    next_instruction = mirrorUIManager.GetVoiceInstructions()[turnNumber];
                     break;
                 case "Touchscreen":
                     next_instruction = touchscreenMenu.GetInstructionCorrespondingToIndex(getCurrentInstruction());
@@ -180,7 +180,7 @@ public class ExperimentManager : MonoBehaviour
     {
         if (studyCurrentlyOngoing)
         {
-            string targetItem = mirrorUIManager.GetVoiceInstructions()[getCurrentInstruction()];
+            string targetItem = mirrorUIManager.GetVoiceInstructions()[turnNumber];
 
             bool targetItemWasSelected = (item == targetItem.ToLower());
 

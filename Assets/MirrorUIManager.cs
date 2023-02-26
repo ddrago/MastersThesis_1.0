@@ -38,6 +38,7 @@ public class MirrorUIManager : NetworkBehaviour
     public LogsManager logsManager;
     public ExperimentManager experimentManager;
     public ControllerManager controllerManager;
+    public VoiceCommands voiceCommands;
 
     // Useful variables
     //public readonly SyncList<string> instructions = new SyncList<string>();
@@ -280,6 +281,7 @@ public class MirrorUIManager : NetworkBehaviour
             longer_index_instruction_list.AddRange(index_instructions_to_give);
             longer_instruction_list.AddRange(instructions_to_give);
         }
+
         instructions.AddRange(longer_index_instruction_list.OrderBy(a => rnd.Next()).ToList());
         voice_instructions.AddRange(longer_instruction_list.OrderBy(a => rnd.Next()).ToList());
     }
@@ -339,6 +341,12 @@ public class MirrorUIManager : NetworkBehaviour
     }
 
     #endregion
+
+    [ClientRpc]
+    public void RpcVoiceCommand(string phrase)
+    {
+        voiceCommands.MirrorPhraseRecognizer(phrase);
+    }
 
     #region tiltLogging
 

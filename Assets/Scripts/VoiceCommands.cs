@@ -23,6 +23,7 @@ public class VoiceCommands : MonoBehaviour
 
     Text PseudoConsole;
     public ExperimentManager experimentManager;
+    public MirrorUIManager mirrorUIManager;
 
 
     // Start is called before the first frame update
@@ -66,6 +67,8 @@ public class VoiceCommands : MonoBehaviour
 #if UNITY_STANDALONE_WIN
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
     {
+        mirrorUIManager.RpcVoiceCommand();
+
         if (!this.gameObject.activeSelf)
         {
             Debug.Log("Voice commands not active!");
@@ -73,13 +76,13 @@ public class VoiceCommands : MonoBehaviour
         }
 
         actions[phrase.text].Invoke();
-        PseudoConsole.text = phrase.text;
-        experimentManager.SelectItemVoiceCondition(phrase.text);
-        experimentManager.NextInstruction();
+        MirrorPhraseRecognizer(phrase.text);
     }
 #elif UNITY_EDITOR
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
     {
+        mirrorUIManager.RpcVoiceCommand(phrase.text);
+
         if (!this.gameObject.activeSelf)
         {
             Debug.Log("Voice commands not active!");
@@ -87,11 +90,16 @@ public class VoiceCommands : MonoBehaviour
         }
 
         actions[phrase.text].Invoke();
-        PseudoConsole.text = phrase.text;
-        experimentManager.SelectItemVoiceCondition(phrase.text);
-        experimentManager.NextInstruction();
+        MirrorPhraseRecognizer(phrase.text);
     }
 #endif
+
+    public void MirrorPhraseRecognizer(string phrase)
+    {
+        PseudoConsole.text = phrase;
+        experimentManager.SelectItemVoiceCondition(phrase);
+        experimentManager.NextInstruction();
+    }
 
     private void Gotit()
     {

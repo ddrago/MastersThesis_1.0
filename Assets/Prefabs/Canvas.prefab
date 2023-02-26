@@ -1293,6 +1293,7 @@ MonoBehaviour:
   logsManager: {fileID: 887146387009144228}
   experimentManager: {fileID: 4225755100613075029}
   controllerManager: {fileID: 4225755100027179038}
+  voiceCommands: {fileID: 4225755100471203999}
   currentControllerItemIndex: 0
 --- !u!1 &4225755098981366584
 GameObject:
@@ -4458,6 +4459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experimentManager: {fileID: 4225755100613075029}
+  mirrorUIManager: {fileID: 4225755098943772899}
 --- !u!1 &4225755100515199093
 GameObject:
   m_ObjectHideFlags: 0
