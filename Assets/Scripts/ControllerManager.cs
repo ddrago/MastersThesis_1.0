@@ -154,21 +154,6 @@ public class ControllerManager : MonoBehaviour
         if (scrollbar != null) scrollbar.value = 1f - index / 5f;
     }
 
-    internal void updateButtonNames(List<string> button_names)
-    {
-        GameObject[] items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems");
-        if (items.Length != button_names.Count)
-        {
-            Debug.LogError("The two lists do not have the same amount of items!!");
-            return;
-        }
-
-        for (int i = 0; i < items.Length; i++)
-        {
-            items[i].GetComponentInChildren<Text>().text = button_names[i];
-        }
-    }
-
     public class AlphanumComparatorFast : IComparer<string>
     {
         public int Compare(string x, string y)

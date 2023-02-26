@@ -70,11 +70,12 @@ public class VoiceCommands : MonoBehaviour
         {
             Debug.Log("Voice commands not active!");
             return;
-        } 
-        
+        }
+
         actions[phrase.text].Invoke();
         PseudoConsole.text = phrase.text;
-        experimentManager.SelectItem(phrase.text.ToLower());
+        experimentManager.SelectItemVoiceCondition(phrase.text);
+        experimentManager.NextInstruction();
     }
 #elif UNITY_EDITOR
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
@@ -87,7 +88,8 @@ public class VoiceCommands : MonoBehaviour
 
         actions[phrase.text].Invoke();
         PseudoConsole.text = phrase.text;
-        //experimentManager.SelectItem(phrase.text.ToLower());
+        experimentManager.SelectItemVoiceCondition(phrase.text);
+        experimentManager.NextInstruction();
     }
 #endif
 

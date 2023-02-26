@@ -176,32 +176,31 @@ public class ExperimentManager : MonoBehaviour
         return mirrorUIManager.GetInstructions()[turnNumber];
     }
 
-    //TODO
-    /*public void SelectItemVoiceCondition(string item)
+    public void SelectItemVoiceCondition(string item)
     {
         if (studyCurrentlyOngoing)
         {
-            bool targetItemWasSelected = i == mirrorUIManager.GetInstructions()[currentInstructionItem];
+            string targetItem = mirrorUIManager.GetVoiceInstructions()[getCurrentInstruction()];
+
+            bool targetItemWasSelected = (item == targetItem.ToLower());
 
             Debug.Log(string.Format("item: {0}, target: {1}, index: {2}, targetIndex: {3}, isCorrect: {4}",
                 item,
-                buttonNames[mirrorUIManager.GetInstructions()[currentInstructionItem]],
-                i,
-                mirrorUIManager.GetInstructions()[currentInstructionItem],
+                targetItem,
+                404,
+                404,
                 targetItemWasSelected));
 
             logsManager.LogOnCSV(
                 string.Format("[{0}]", currentCondition.ToUpper()),
                 item,
-                buttonNames[mirrorUIManager.GetInstructions()[currentInstructionItem]],
-                i,
-                mirrorUIManager.GetInstructions()[currentInstructionItem],
+                targetItem,
+                404,
+                404,
                 targetItemWasSelected);
-
-            NextInstruction();
         }
         else Debug.Log("WARNING: Before providing input, please select a condition.");
-    }*/
+    }
 
     public List<string> GetCopyOfInstructionNames()
     {
