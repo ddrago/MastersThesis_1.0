@@ -24,21 +24,45 @@ public class TouchscreenMenu : MonoBehaviour
         ShuffleTouchscreenMenuItems();
     }
 
-    public void ShuffleTouchscreenMenuItems()
+    public string GetInstructionCorrespondingToIndex(int currentInstructionIndex)
     {
+        //return currentInstructionName
         GameObject[] items = GameObject.FindGameObjectsWithTag("TouchscreenMenuSelectableItems")
             .OrderBy(obj => obj.name, new AlphanumComparatorFast())
             .ToArray();
 
-        //TODO we want to randomly assign one of the six possible button names from a copied list of the names
-        List<string> names = experimentManager.GetCopyOfInstructionNames().OrderBy(a => rnd.Next()).ToList();
+        Debug.Log("Index in TouchscreenMenu: " + currentInstructionIndex.ToString());
+        Debug.Log("Instruction in Touchscreen: " + items[experimentManager.getCurrentInstruction()].GetComponentInChildren<Text>().text);
 
-        // assign one of its string elements to each items text
-        if (names.Count != items.Length)
-            Debug.LogError(string.Format("In ShuffleTouchscreenMenuItems: different number of buttons ({0}) and respective names! ({1})", items.Length, names.Count));
-        else
-            for (int i = 0; i < names.Count; i++)
-                items[i].GetComponentInChildren<Text>().text = names[i];
+
+        /*for (int j = 0; j < items.Length; j++)
+            Debug.Log(items[j].GetComponentInChildren<Text>().text);
+
+        Debug.Log(string.Format("TargetIndex?: {0}, TargetButton?: {1}", 
+            currentInstructionIndex, // This is right
+            items[currentInstructionIndex].GetComponentInChildren<Text>().text));*/ //This shit is wrong somehow. 
+
+        return items[currentInstructionIndex].GetComponentInChildren<Text>().text;
+    }
+
+    public void ShuffleTouchscreenMenuItems()
+    {
+        if (experimentManager.studyCurrentlyOngoing)
+        {
+            GameObject[] items = GameObject.FindGameObjectsWithTag("TouchscreenMenuSelectableItems")
+                .OrderBy(obj => obj.name, new AlphanumComparatorFast())
+                .ToArray();
+
+            //TODO we want to randomly assign one of the six possible button names from a copied list of the names
+            List<string> names = experimentManager.GetCopyOfInstructionNames().OrderBy(a => rnd.Next()).ToList();
+
+            // assign one of its string elements to each items text
+            if (names.Count != items.Length)
+                Debug.LogError(string.Format("In ShuffleTouchscreenMenuItems: different number of buttons ({0}) and respective names! ({1})", items.Length, names.Count));
+            else
+                for (int i = 0; i < names.Count; i++)
+                    items[i].GetComponentInChildren<Text>().text = names[i];
+        }
     }
 
     public void ButtonPress(GameObject go)
@@ -63,9 +87,10 @@ public class TouchscreenMenu : MonoBehaviour
             i);
 
         ShuffleTouchscreenMenuItems();
+        experimentManager.NextInstruction();
     }
 
-    internal void UpdateButtonNames(List<string> button_names)
+    /*internal void UpdateButtonNames(List<string> button_names)
     {
         GameObject[] items = GameObject.FindGameObjectsWithTag("TouchscreenMenuSelectableItems")
             .OrderBy(obj => obj.name, new AlphanumComparatorFast())
@@ -80,5 +105,5 @@ public class TouchscreenMenu : MonoBehaviour
         {
             items[i].GetComponentInChildren<Text>().text = button_names[i];
         }
-    }
+    }*/
 }

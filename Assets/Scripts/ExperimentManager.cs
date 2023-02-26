@@ -34,9 +34,9 @@ public class ExperimentManager : MonoBehaviour
     private string next_instruction;
 
     // Mid-study variables
-    private int currentInstructionItem = 0;
+    private int turnNumber = 0;
     private string currentCondition;
-    private bool studyCurrentlyOngoing = false;
+    public bool studyCurrentlyOngoing = false;
 
     private static System.Random rnd = new System.Random();
 
@@ -51,7 +51,7 @@ public class ExperimentManager : MonoBehaviour
 
     public void StartCondition(string condition)
     {
-        currentInstructionItem = 0;
+        turnNumber = 0;
         currentCondition = condition;
         studyCurrentlyOngoing = true;
 
@@ -66,14 +66,16 @@ public class ExperimentManager : MonoBehaviour
                 break;
             case "Touchscreen":
                 touchscreenMenu.OnStartCondition();
+                next_instruction = touchscreenMenu.GetInstructionCorrespondingToIndex(getCurrentInstruction());
                 break;
             case "Controller":
                 // Maybe
                 break;
         }
 
-        //Show the instruction
-        instructionGiver.text = getCurrentInstruction().ToString();
+        //Show the instruction 
+        UpdateInstructionGiver(next_instruction);
+        //UpdateInstructionGiver(getCurrentInstruction().ToString());
         
         // Log everything
         logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", 404, 404, true);
@@ -81,18 +83,34 @@ public class ExperimentManager : MonoBehaviour
     }
 
     // TODO
-    public void updateInstructionGiver(string instruction)
+    public void UpdateInstructionGiver(string instruction)
     {
         instructionGiver.text = instruction;
     }
 
-    void NextInstruction()
+    public void NextInstruction()
     {
-        currentInstructionItem += 1;
+        turnNumber += 1;
 
-        if (currentInstructionItem < mirrorUIManager.GetInstructions().Count)
+        if (turnNumber < mirrorUIManager.GetInstructions().Count)
         {
-            instructionGiver.text = getCurrentInstruction().ToString();
+            switch (currentCondition)
+            {
+                case "Voice":
+                    // Maybe
+                    break;
+                case "Touchscreen":
+                    next_instruction = touchscreenMenu.GetInstructionCorrespondingToIndex(getCurrentInstruction());
+                    break;
+                case "Controller":
+                    // Maybe
+                    break;
+            }
+
+            UpdateInstructionGiver(next_instruction);
+            //Debug.Log("Next instruction:" + next_instruction);
+            //instructionGiver.text = next_instruction;
+            //instructionGiver.text = getCurrentInstruction().ToString();
         }
         else EndCondition();
     }
@@ -148,15 +166,13 @@ public class ExperimentManager : MonoBehaviour
                 i, 
                 getCurrentInstruction(), 
                 targetItemWasSelected);
-            
-            NextInstruction();
         }
         else Debug.Log("WARNING: Before providing input, please select a condition.");
     }
 
     public int getCurrentInstruction()
     {
-        return mirrorUIManager.GetInstructions()[currentInstructionItem];
+        return mirrorUIManager.GetInstructions()[turnNumber];
     }
 
     //TODO

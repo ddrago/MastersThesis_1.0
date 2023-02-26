@@ -311,7 +311,7 @@ public class MirrorUIManager : NetworkBehaviour
     public void RpcUpdateInstructions(string instruction)
     {
         Debug.Log("Checkpoint");
-        experimentManager.updateInstructionGiver(instruction);
+        experimentManager.UpdateInstructionGiver(instruction);
         Debug.Log("CLIENT: " + instruction);
     }
 
