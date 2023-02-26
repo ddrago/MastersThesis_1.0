@@ -42,7 +42,7 @@ public class MirrorUIManager : NetworkBehaviour
     // Useful variables
     //public readonly SyncList<string> instructions = new SyncList<string>();
     public readonly SyncList<int> instructions = new SyncList<int>();
-    public readonly SyncList<string> buttonNames = new SyncList<string>();
+    public readonly SyncList<string> voice_instructions = new SyncList<string>();
 
     [SyncVar(hook = nameof(UpdateCurrentControllerItemIndex))]
     public int currentControllerItemIndex = 0;
@@ -281,11 +281,17 @@ public class MirrorUIManager : NetworkBehaviour
             longer_instruction_list.AddRange(instructions_to_give);
         }
         instructions.AddRange(longer_index_instruction_list.OrderBy(a => rnd.Next()).ToList());
+        voice_instructions.AddRange(longer_instruction_list.OrderBy(a => rnd.Next()).ToList());
     }
 
     public List<int> GetInstructions()
     {
         return instructions.ToList<int>();
+    }
+
+    public List<string> GetVoiceInstructions()
+    {
+        return voice_instructions.ToList();
     }
 
     #endregion

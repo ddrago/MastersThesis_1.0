@@ -61,7 +61,7 @@ public class ExperimentManager : MonoBehaviour
         switch (condition)
         {
             case "Voice":
-                // Maybe
+                next_instruction = mirrorUIManager.GetVoiceInstructions()[getCurrentInstruction()];
                 break;
             case "Touchscreen":
                 touchscreenMenu.OnStartCondition();
@@ -90,12 +90,18 @@ public class ExperimentManager : MonoBehaviour
     {
         turnNumber += 1;
 
+        if (mirrorUIManager.GetInstructions().Count != mirrorUIManager.GetVoiceInstructions().Count)
+        {
+            Debug.LogError("ERROR: index-based instructions and name-based ones should have the same amount of elements");
+            return;
+        }
+
         if (turnNumber < mirrorUIManager.GetInstructions().Count)
         {
             switch (currentCondition)
             {
                 case "Voice":
-                    next_instruction = "TODO";
+                    next_instruction = mirrorUIManager.GetVoiceInstructions()[getCurrentInstruction()];
                     break;
                 case "Touchscreen":
                     next_instruction = touchscreenMenu.GetInstructionCorrespondingToIndex(getCurrentInstruction());
