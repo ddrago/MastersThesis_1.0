@@ -22,13 +22,13 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
         }
 
         if (Accelerometer.current != null)
-            InputSystem.EnableDevice(Accelerometer.current);
+            InputSystem.EnableDevice(LinearAccelerationSensor.current);
     }
 
     protected void OnDisable()
     {
         if (Accelerometer.current != null)
-            InputSystem.DisableDevice(Accelerometer.current);
+            InputSystem.DisableDevice(LinearAccelerationSensor.current);
     }
 
     void Start()
@@ -55,19 +55,19 @@ public class CyclingPerformanceLogsManager : MonoBehaviour
                 dir.Normalize();*/
 
             return dir;
-        #elif UNITY_ANDROID
-            if (!Accelerometer.current.enabled)
+#elif UNITY_ANDROID
+            if (!LinearAccelerationSensor.current.enabled)
             {
                 PseudoConsole.text = "The accelerometer is not enabled";
-                InputSystem.EnableDevice(Accelerometer.current);
+                InputSystem.EnableDevice(LinearAccelerationSensor.current);
             }
             else
             {
-                return Accelerometer.current.acceleration.ReadValue();
+                return LinearAccelerationSensor.current.acceleration.ReadValue();
             }
 
             return Vector3.zero;
-        #endif
+#endif
         //It's neither unity editor nor android
         return Vector3.zero;
 
