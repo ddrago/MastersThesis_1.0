@@ -16,6 +16,7 @@ public class ExperimentManager : MonoBehaviour
     public MirrorUIManager mirrorUIManager;
     public TouchscreenMenu touchscreenMenu;
     public ControllerManager controllerManager;
+    public VoiceCommands voiceManager;
 
     [Header("Menu Manager")]
     public GameObject VoiceConditionButton;
@@ -119,6 +120,8 @@ public class ExperimentManager : MonoBehaviour
     private void EndCondition()
     {
         studyCurrentlyOngoing = false;
+        if (currentCondition == "Voice")
+            voiceManager.StopKeywordRecognizer();
 
         logsManager.LogOnCSV(string.Format("[END {0} CONDITION]", currentCondition.ToUpper()), "N/A", "N/A", 404, 404, true);
 

@@ -4909,6 +4909,7 @@ MonoBehaviour:
   mirrorUIManager: {fileID: 4225755098943772899}
   touchscreenMenu: {fileID: 4225755099041569359}
   controllerManager: {fileID: 4225755100027179038}
+  voiceManager: {fileID: 4225755100471203999}
   VoiceConditionButton: {fileID: 4225755099114872086}
   TouchscreenConditionButton: {fileID: 4225755099838637489}
   ControllerConditionButton: {fileID: 4225755099517863508}

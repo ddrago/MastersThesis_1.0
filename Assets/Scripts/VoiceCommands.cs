@@ -105,4 +105,17 @@ public class VoiceCommands : MonoBehaviour
     {
         Debug.Log("Got it!");
     }
+
+    public void StopKeywordRecognizer()
+    {
+#if UNITY_STANDALONE_WIN
+        if (keywordRecognizer.IsRunning)
+            Debug.Log("Deactivating voice commands...");
+            keywordRecognizer.Stop();
+#elif UNITY_EDITOR
+        if (keywordRecognizer.IsRunning)
+            Debug.Log("Deactivating voice commands...");
+            keywordRecognizer.Stop();
+#endif
+    }
 }
