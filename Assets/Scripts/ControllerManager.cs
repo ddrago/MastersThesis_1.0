@@ -19,6 +19,8 @@ public class ControllerManager : MonoBehaviour
     /*public LogsManager logsManager;
     public ExperimentManager experimentManager;*/
     public Text pseudoConsole;
+    string consolePreMessage = "Last input: ";
+
     public Scrollbar scrollbar;
     public MirrorUIManager mirrorUIManager;
     public ExperimentManager experimentManager;
@@ -111,7 +113,7 @@ public class ControllerManager : MonoBehaviour
         int i = mirrorUIManager.GetCurrentControllerItemIndex();
         string itemSelected = items[i].GetComponentInChildren<Text>().text;
 
-        pseudoConsole.text = itemSelected;
+        pseudoConsole.text = consolePreMessage + itemSelected;
 
         experimentManager.SelectItem(
             itemSelected,

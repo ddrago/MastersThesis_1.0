@@ -22,6 +22,8 @@ public class VoiceCommands : MonoBehaviour
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
     Text PseudoConsole;
+    string consolePreMessage = "Last input: ";
+
     public ExperimentManager experimentManager;
     public MirrorUIManager mirrorUIManager;
 
@@ -96,7 +98,7 @@ public class VoiceCommands : MonoBehaviour
 
     public void MirrorPhraseRecognizer(string phrase)
     {
-        PseudoConsole.text = phrase;
+        PseudoConsole.text = consolePreMessage + phrase;
         experimentManager.SelectItemVoiceCondition(phrase);
         experimentManager.NextInstruction();
     }

@@ -9,6 +9,8 @@ public class TouchscreenMenu : MonoBehaviour
 {
     public ExperimentManager experimentManager;
     public Text pseudoConsole;
+    string consolePreMessage = "Last input: ";
+
     public Scrollbar scrollbar;
 
     private static System.Random rnd = new System.Random();
@@ -69,7 +71,7 @@ public class TouchscreenMenu : MonoBehaviour
             return;
         }
 
-        pseudoConsole.text = go.gameObject.GetComponentInChildren<Text>().text;
+        pseudoConsole.text = consolePreMessage + go.gameObject.GetComponentInChildren<Text>().text;
         experimentManager.SelectItem(
             go.gameObject.GetComponentInChildren<Text>().text,
             items[experimentManager.getCurrentInstruction()].GetComponentInChildren<Text>().text,
