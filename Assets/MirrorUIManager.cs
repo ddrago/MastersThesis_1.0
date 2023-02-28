@@ -72,7 +72,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressStartExperimentButton()
     {
         StartExperimentButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--VOICE BUTTON--
@@ -85,7 +84,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressVoiceExperimentButton()
     {
         VoiceExperimentButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BUTTON--
@@ -98,7 +96,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenExperimentButton()
     {
         TouchscreenExperimentButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--CONTROLLER BUTTON--
@@ -111,7 +108,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressControllerExperimentButton()
     {
         ControllerExperimentButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--GESTURES BUTTON--
@@ -124,7 +120,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressGesturesExperimentButton()
     {
         GesturesExperimentButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--VOICE BACK BUTTON--
@@ -137,7 +132,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressVoiceBackButton()
     {
         VoiceBackButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BACK BUTTON--
@@ -150,7 +144,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenBackButton()
     {
         TouchscreenBackButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--CONTROLLER BACK BUTTON--
@@ -163,7 +156,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressControllerBackButton()
     {
         ControllerBackButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--GESTURES BACK BUTTON--
@@ -176,7 +168,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressGesturesBackButton()
     {
         GesturesBackButton.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BUTTON 0--
@@ -189,7 +180,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenButton0()
     {
         TouchscreenButton0.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BUTTON 1--
@@ -202,7 +192,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenButton1()
     {
         TouchscreenButton1.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BUTTON 2--
@@ -215,7 +204,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenButton2()
     {
         TouchscreenButton2.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BUTTON 3--
@@ -228,7 +216,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenButton3()
     {
         TouchscreenButton3.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BUTTON 4--
@@ -241,7 +228,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenButton4()
     {
         TouchscreenButton4.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     //--TOUCHSCREEN BUTTON 5--
@@ -254,7 +240,6 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressTouchscreenButton5()
     {
         TouchscreenButton5.onClick.Invoke();
-        //pseudoConsole.text = "Start Experiment Button pressed"; // do stuff on server
     }
 
     #endregion
@@ -304,7 +289,7 @@ public class MirrorUIManager : NetworkBehaviour
     public void UpdateCurrentControllerItemIndex(int oldIndex, int newIndex)
     {
 
-        pseudoConsole.text = newIndex.ToString();
+        //pseudoConsole.text = newIndex.ToString();
         // Here I can update the selected item maybe
 
         controllerManager.HighlightSelectedItem(newIndex);
