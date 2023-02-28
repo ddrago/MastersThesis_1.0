@@ -19,6 +19,12 @@ namespace Mirror
         public int buttonHeight = 20;
         public int fontSize = 14;
 
+        public void LeftieToggle()
+        {
+            if (offsetX == 0) offsetX = 1460;
+            else offsetX = 0;
+        }
+
         bool Button(string text)
         {
             return GUILayout.Button(text, GUILayout.Height(buttonHeight));
