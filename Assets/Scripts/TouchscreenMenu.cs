@@ -77,7 +77,7 @@ public class TouchscreenMenu : MonoBehaviour
             items[experimentManager.getCurrentInstruction()].GetComponentInChildren<Text>().text,
             i);
 
-        ShuffleTouchscreenMenuItems();
+        //ShuffleTouchscreenMenuItems();
         experimentManager.NextInstruction();
     }
 }

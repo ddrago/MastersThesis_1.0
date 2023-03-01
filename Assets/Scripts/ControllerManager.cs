@@ -120,7 +120,7 @@ public class ControllerManager : MonoBehaviour
             items[experimentManager.getCurrentInstruction()].GetComponentInChildren<Text>().text,
             i);
 
-        ShuffleControllerMenuItems();
+        //ShuffleControllerMenuItems();
         experimentManager.NextInstruction();
     }
 
