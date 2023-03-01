@@ -470,9 +470,78 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168838674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1995, y: 765.06903, z: -864.961}
+  m_LocalPosition: {x: 427.75778, y: 765.06903, z: -864.961}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1495041503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1495041505}
+  - component: {fileID: 1495041504}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1495041504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495041503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a34b426d818a3f479d42ef594884f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BeepNegative
+    clip: {fileID: 8300000, guid: 868cbb1308231664ca50177bd30690e9, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BeepPositive
+    clip: {fileID: 8300000, guid: 35737c618576d5b43a73a188046b9e82, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: MenuButtonPress
+    clip: {fileID: 8300000, guid: a8854f2fd4bea8845a7b409009b43808, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: MenuSelectionChange
+    clip: {fileID: 8300000, guid: 0258ef560d07e614fb7658dfced9ed2b, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: SingleBeep
+    clip: {fileID: 8300000, guid: e0eb3e2af8f51054088275d429a9a9a6, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+--- !u!4 &1495041505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495041503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1095.1147, y: 573.9367, z: -882.0927}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -154,6 +154,8 @@ public class ExperimentManager : MonoBehaviour
     {
         if (studyCurrentlyOngoing)
         {
+            FindObjectOfType<AudioManager>().Play("BeepPositive");
+
             bool targetItemWasSelected = i == getCurrentInstruction();
 
             Debug.Log(string.Format("item: {0}, target: {1}, index: {2}, targetIndex: {3}, isCorrect: {4}", 
