@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
 
 #if UNITY_STANDALONE_WIN
     using UnityEngine.Windows.Speech;
 #elif UNITY_EDITOR
-    using UnityEngine.Windows.Speech;
+using UnityEngine.Windows.Speech;
 #endif
 
 public class VoiceCommands : MonoBehaviour
@@ -27,6 +28,8 @@ public class VoiceCommands : MonoBehaviour
     public ExperimentManager experimentManager;
     public MirrorUIManager mirrorUIManager;
 
+    private bool commandWasGiven = false;
+    public Dictionary<int, bool> timerCommandLog = new Dictionary<int, bool>();
 
     // Start is called before the first frame update
     void Start()
@@ -92,16 +95,37 @@ public class VoiceCommands : MonoBehaviour
         }
 
         actions[phrase.text].Invoke();
-        MirrorPhraseRecognizer(phrase.text);
+        MirrorPhraseRecognizer(phrase.text, true);
     }
 #endif
 
-    public void MirrorPhraseRecognizer(string phrase)
+    public void MirrorPhraseRecognizer(string phrase, bool isRegular)
     {
+        timerCommandLog[experimentManager.turnNumber] = isRegular;
         PseudoConsole.text = consolePreMessage + phrase;
         experimentManager.SelectItemVoiceCondition(phrase);
         experimentManager.NextInstruction();
+
+        // Register we are waiting for next instruction 
+        timerCommandLog.Add(experimentManager.turnNumber, false);
+        StartCoroutine(WaitAndPrint(experimentManager.turnNumber, 10));
     }
+
+    IEnumerator WaitAndPrint(int turn, float waitingTime)
+    {
+        yield return new WaitForSeconds(waitingTime);
+        if (!timerCommandLog[turn])
+        {
+            MirrorPhraseRecognizer("Timeout", false);
+        }
+
+    }
+
+    /*private void VoiceCommandCountdown()
+    {
+        if(!commandWasGiven)
+            Debug.Log("TIMEOUT!");
+    }*/
 
     private void Gotit()
     {

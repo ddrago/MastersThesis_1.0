@@ -330,7 +330,7 @@ public class MirrorUIManager : NetworkBehaviour
     [ClientRpc]
     public void RpcVoiceCommand(string phrase)
     {
-        voiceCommands.MirrorPhraseRecognizer(phrase);
+        voiceCommands.MirrorPhraseRecognizer(phrase, true);
     }
 
     #region tiltLogging

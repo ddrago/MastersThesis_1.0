@@ -34,7 +34,7 @@ public class ExperimentManager : MonoBehaviour
     private string next_instruction;
 
     // Mid-study variables
-    private int turnNumber = 0;
+    public int turnNumber = 0;
     private string currentCondition;
     public bool studyCurrentlyOngoing = false;
 
