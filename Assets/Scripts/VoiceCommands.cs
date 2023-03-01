@@ -28,8 +28,9 @@ public class VoiceCommands : MonoBehaviour
     public ExperimentManager experimentManager;
     public MirrorUIManager mirrorUIManager;
 
-    private bool commandWasGiven = false;
-    public Dictionary<int, bool> timerCommandLog = new Dictionary<int, bool>();
+    public float conditionStartWaitingCountdownDuration = 10;
+    public float waitingCountdownDuration = 15;
+    private Dictionary<int, bool> timerCommandLog = new Dictionary<int, bool>();
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +62,9 @@ public class VoiceCommands : MonoBehaviour
         keywordRecognizer.Start();
 #endif
 
+        // Start the countdown for the first item
+        timerCommandLog.Add(experimentManager.turnNumber, false);
+        StartCoroutine(WaitAndPrint(experimentManager.turnNumber, conditionStartWaitingCountdownDuration));
     }
 
     // Update is called once per frame
@@ -108,7 +112,7 @@ public class VoiceCommands : MonoBehaviour
 
         // Register we are waiting for next instruction 
         timerCommandLog.Add(experimentManager.turnNumber, false);
-        StartCoroutine(WaitAndPrint(experimentManager.turnNumber, 10));
+        StartCoroutine(WaitAndPrint(experimentManager.turnNumber, waitingCountdownDuration));
     }
 
     IEnumerator WaitAndPrint(int turn, float waitingTime)
