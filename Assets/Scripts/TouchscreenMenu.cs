@@ -78,6 +78,13 @@ public class TouchscreenMenu : MonoBehaviour
             i);
 
         //ShuffleTouchscreenMenuItems();
-        experimentManager.NextInstruction();
+        //experimentManager.NextInstruction();
+    }
+
+    public void SetButtonsInteractability(bool canSelect)
+    {
+        GameObject[] items = GameObject.FindGameObjectsWithTag("TouchscreenMenuSelectableItems");
+        foreach (GameObject i in items)
+            i.GetComponent<Button>().interactable = canSelect;
     }
 }

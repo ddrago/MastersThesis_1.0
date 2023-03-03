@@ -9,6 +9,8 @@ public class ExperimentManager : MonoBehaviour
 {
     [Header("Experiment variables")]
     public int instructionMultiplicationNumber = 3;
+    public float interSelectionPauseDuration = 0.5f;
+    private bool canSelect = true;
 
     [Header("GameObject Elements")]
     public LogsManager logsManager;
@@ -158,33 +160,47 @@ public class ExperimentManager : MonoBehaviour
 
             bool targetItemWasSelected = i == getCurrentInstruction();
 
-            Debug.Log(string.Format("item: {0}, target: {1}, index: {2}, targetIndex: {3}, isCorrect: {4}", 
+            Debug.Log(string.Format("CanSelect: {5}, item: {0}, target: {1}, index: {2}, targetIndex: {3}, isCorrect: {4}",
                 item,
-                targetItem, 
-                i, 
-                getCurrentInstruction(), 
-                targetItemWasSelected));
-            
-            logsManager.LogOnCSV(
-                string.Format("[{0}]", currentCondition.ToUpper()), 
-                item,
-                targetItem, 
-                i, 
-                getCurrentInstruction(), 
-                targetItemWasSelected);
-        }
-        else Debug.Log("WARNING: Before providing input, please select a condition.");
-    }
+                targetItem,
+                i,
+                getCurrentInstruction(),
+                targetItemWasSelected,
+                canSelect.ToString()));
 
-    public int getCurrentInstruction()
-    {
-        return mirrorUIManager.GetInstructions()[turnNumber];
+            logsManager.LogOnCSV(
+                string.Format("[{0}]", currentCondition.ToUpper()),
+                item,
+                targetItem,
+                i,
+                getCurrentInstruction(),
+                targetItemWasSelected);
+
+            NextInstruction();
+        }
+        else
+            Debug.Log("Too early!");
+
+        //Debug.Log(currentCondition);
+        //make it impossible to select for 0.5 seconds after selection
+        switch (currentCondition)
+        {
+            case "Touchscreen":
+                touchscreenMenu.SetButtonsInteractability(false);
+                break;
+            default:
+                Debug.LogError("Condition not found");
+                break;
+        }
+        Invoke("enableSelection", interSelectionPauseDuration);
     }
 
     public void SelectItemVoiceCondition(string item)
     {
         if (studyCurrentlyOngoing)
         {
+            FindObjectOfType<AudioManager>().Play("BeepPositive");
+
             string targetItem = mirrorUIManager.GetVoiceInstructions()[turnNumber];
 
             bool targetItemWasSelected = (item == targetItem.ToLower());
@@ -205,6 +221,24 @@ public class ExperimentManager : MonoBehaviour
                 targetItemWasSelected);
         }
         else Debug.Log("WARNING: Before providing input, please select a condition.");
+    }
+
+    public void enableSelection()
+    {
+        switch (currentCondition)
+        {
+            case "Touchscreen":
+                touchscreenMenu.SetButtonsInteractability(true);
+                break;
+            default:
+                Debug.LogError("Condition not found");
+                break;
+        }
+    }
+
+    public int getCurrentInstruction()
+    {
+        return mirrorUIManager.GetInstructions()[turnNumber];
     }
 
     public List<string> GetCopyOfInstructionNames()

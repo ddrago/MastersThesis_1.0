@@ -9,7 +9,7 @@ public class LefieManager : MonoBehaviour
     [Header("Menus")]
     //One side
     public GameObject ExperimentMenu;
-    public NetworkManagerHUD networkManagerHUD;
+    private NetworkManagerHUD networkManagerHUD;
 
     // Other
     public GameObject MainMenu;
@@ -41,7 +41,8 @@ public class LefieManager : MonoBehaviour
         {
             // One side
             ExperimentMenu.transform.position = leftieExperimentMenuSpawnpoint.transform.position;
-            networkManagerHUD.offsetX = 1460;
+            if(networkManagerHUD!=null)
+                networkManagerHUD.offsetX = 1460;
 
             // The other side
             MainMenu.transform.position = leftieMainMenuSpawnpoint.transform.position;
@@ -53,7 +54,8 @@ public class LefieManager : MonoBehaviour
         {
             // One side
             ExperimentMenu.transform.position = rightyExperimentMenuSpawnpoint.transform.position;
-            networkManagerHUD.offsetX = 0;
+            if (networkManagerHUD != null)
+                networkManagerHUD.offsetX = 0;
 
             // The other side
             MainMenu.transform.position = rightyMainMenuSpawnpoint.transform.position;

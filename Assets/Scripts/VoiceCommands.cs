@@ -76,7 +76,7 @@ public class VoiceCommands : MonoBehaviour
 #if UNITY_STANDALONE_WIN
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)
     {
-        mirrorUIManager.RpcVoiceCommand();
+        mirrorUIManager.RpcVoiceCommand(phrase.text);
 
         if (!this.gameObject.activeSelf)
         {
@@ -85,7 +85,7 @@ public class VoiceCommands : MonoBehaviour
         }
 
         actions[phrase.text].Invoke();
-        MirrorPhraseRecognizer(phrase.text);
+        MirrorPhraseRecognizer(phrase.text, true);
     }
 #elif UNITY_EDITOR
     private void recognizedPhrase(PhraseRecognizedEventArgs phrase)

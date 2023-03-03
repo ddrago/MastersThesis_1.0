@@ -121,7 +121,7 @@ public class ControllerManager : MonoBehaviour
             i);
 
         //ShuffleControllerMenuItems();
-        experimentManager.NextInstruction();
+        //experimentManager.NextInstruction();
     }
 
     private void MoveUp()
