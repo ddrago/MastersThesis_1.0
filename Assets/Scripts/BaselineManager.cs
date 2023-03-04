@@ -8,6 +8,10 @@ public class BaselineManager : MonoBehaviour
     public GameObject instructionGiver;
     public GameObject pseudoConsole;
 
+    public ExperimentManager experimentManager;
+
+    public float baselineDuration = 45f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +29,14 @@ public class BaselineManager : MonoBehaviour
         pleaseSelectItem.SetActive(false);
         instructionGiver.SetActive(false);
         pseudoConsole.SetActive(false);
+
+        Invoke("ExitCondition", baselineDuration);
     }
 
-    public void OnExitCondition()
+    public void ExitCondition()
     {
+        experimentManager.EndCondition();
+
         pleaseSelectItem.SetActive(true);
         instructionGiver.SetActive(true);
         pseudoConsole.SetActive(true);

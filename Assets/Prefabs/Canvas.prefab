@@ -6572,6 +6572,8 @@ MonoBehaviour:
   pleaseSelectItem: {fileID: 4225755100571171453}
   instructionGiver: {fileID: 4225755098981366584}
   pseudoConsole: {fileID: 4225755099943920679}
+  experimentManager: {fileID: 4225755100613075029}
+  baselineDuration: 5
 --- !u!1 &7508668483511899908
 GameObject:
   m_ObjectHideFlags: 0

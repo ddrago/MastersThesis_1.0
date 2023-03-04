@@ -126,7 +126,7 @@ public class ExperimentManager : MonoBehaviour
         else EndCondition();
     }
 
-    private void EndCondition()
+    public void EndCondition()
     {
         studyCurrentlyOngoing = false;
         if (currentCondition == "Voice")
