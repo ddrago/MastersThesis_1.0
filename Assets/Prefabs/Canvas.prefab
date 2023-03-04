@@ -5117,7 +5117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed819b9e1ba05f44992cf07313ff61f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instructionMultiplicationNumber: 2
+  instructionMultiplicationNumber: 4
   interSelectionPauseDuration: 1
   logsManager: {fileID: 887146387009144228}
   instructionGiver: {fileID: 4225755098981366590}
@@ -6612,7 +6612,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExperimentMenu: {fileID: 4225755100613075031}
-  networkManagerHUD: {fileID: 0}
   MainMenu: {fileID: 4225755099161674587}
   ControllerMenu: {fileID: 4225755100027179032}
   TouchscreenMenu: {fileID: 4225755099041569353}
