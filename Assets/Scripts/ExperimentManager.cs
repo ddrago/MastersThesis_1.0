@@ -19,17 +19,18 @@ public class ExperimentManager : MonoBehaviour
     public TouchscreenMenu touchscreenMenu;
     public ControllerManager controllerManager;
     public VoiceCommands voiceManager;
+    public BaselineManager baselineManager;
 
     [Header("Menu Manager")]
     public GameObject VoiceConditionButton;
     public GameObject TouchscreenConditionButton;
     public GameObject ControllerConditionButton;
-    //public GameObject GesturesConditionButton;
+    public GameObject BaselineConditionButton;
     public GameObject MainMenu;
     public GameObject VoiceMenu;
     public GameObject TouchscreenMenu;
     public GameObject ControllerMenu;
-    //public GameObject GesturesMenu;
+    public GameObject BaselineMenu;
 
     private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "Calls", "Maps", "News", "Weather", "Terrain" });
     private static List<int> index_instructions_to_give = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
@@ -73,6 +74,12 @@ public class ExperimentManager : MonoBehaviour
             case "Controller":
                 controllerManager.OnStartCondition();
                 next_instruction = controllerManager.GetInstructionCorrespondingToIndex(getCurrentInstruction());
+                break;
+            case "Baseline":
+                baselineManager.OnStartCondition();
+                break;
+            default:
+                Debug.LogError("Condition not found");
                 break;
         }
 
@@ -137,7 +144,7 @@ public class ExperimentManager : MonoBehaviour
         VoiceConditionButton.GetComponent<Button>().interactable = status;
         TouchscreenConditionButton.GetComponent<Button>().interactable = status;
         ControllerConditionButton.GetComponent<Button>().interactable = status;
-        //GesturesConditionButton.GetComponent<Button>().interactable = status;
+        BaselineConditionButton.GetComponent<Button>().interactable = status;
     }
 
     public void GoBackToMainMenu()
@@ -149,7 +156,7 @@ public class ExperimentManager : MonoBehaviour
         VoiceMenu.SetActive(false);
         TouchscreenMenu.SetActive(false);
         ControllerMenu.SetActive(false);
-        //GesturesMenu.SetActive(false);
+        BaselineMenu.SetActive(false);
     }
 
     public void SelectItem(string item, string targetItem, int i)

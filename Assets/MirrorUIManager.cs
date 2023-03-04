@@ -18,13 +18,13 @@ public class MirrorUIManager : NetworkBehaviour
     public Button VoiceExperimentButton;
     public Button TouchscreenExperimentButton;
     public Button ControllerExperimentButton;
-    public Button GesturesExperimentButton;
+    public Button BaselineExperimentButton;
 
     [Header("Back Buttons")]
     public Button VoiceBackButton;
     public Button TouchscreenBackButton;
     public Button ControllerBackButton;
-    public Button GesturesBackButton;
+    public Button BaselineBackButton;
 
     [Header("Touchscreen Menu objects")]
     public Button TouchscreenButton0;
@@ -110,16 +110,16 @@ public class MirrorUIManager : NetworkBehaviour
         ControllerExperimentButton.onClick.Invoke();
     }
 
-    //--GESTURES BUTTON--
-    public void OnGesturesExperiment()
+    //--Baseline BUTTON--
+    public void OnBaselineExperiment()
     {
-        CmdPressGesturesExperimentButton();
+        CmdPressBaselineExperimentButton();
     }
 
     [Command(requiresAuthority = false)]
-    void CmdPressGesturesExperimentButton()
+    void CmdPressBaselineExperimentButton()
     {
-        GesturesExperimentButton.onClick.Invoke();
+        BaselineExperimentButton.onClick.Invoke();
     }
 
     //--VOICE BACK BUTTON--
@@ -158,16 +158,16 @@ public class MirrorUIManager : NetworkBehaviour
         ControllerBackButton.onClick.Invoke();
     }
 
-    //--GESTURES BACK BUTTON--
-    public void OnGesturesBack()
+    //--Baseline BACK BUTTON--
+    public void OnBaselineBack()
     {
-        CmdPressGesturesBackButton();
+        CmdPressBaselineBackButton();
     }
 
     [Command(requiresAuthority = false)]
-    void CmdPressGesturesBackButton()
+    void CmdPressBaselineBackButton()
     {
-        GesturesBackButton.onClick.Invoke();
+        BaselineBackButton.onClick.Invoke();
     }
 
     //--TOUCHSCREEN BUTTON 0--
