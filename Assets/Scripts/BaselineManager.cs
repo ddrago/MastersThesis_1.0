@@ -47,10 +47,12 @@ public class BaselineManager : MonoBehaviour
         pleaseSelectItem.SetActive(true);
         instructionGiver.SetActive(true);
         pseudoConsole.SetActive(true);
+        FindObjectOfType<AudioManager>().Play("BeepPositive");
     }
 
     private void PleaseStopCycling()
     {
         mainText.text = "Ok, feel free to stop.";
+        FindObjectOfType<AudioManager>().Play("BeepPositive");
     }
 }
