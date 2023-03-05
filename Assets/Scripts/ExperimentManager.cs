@@ -89,7 +89,8 @@ public class ExperimentManager : MonoBehaviour
 
         //Show the instruction 
         UpdateInstructionGiver(next_instruction);
-        
+        DeactivateButtonsForDuration(interSelectionPauseDuration);
+
         // Log everything
         logsManager.LogOnCSV(string.Format("[START {0} CONDITION]", condition.ToUpper()), "N/A", "N/A", 404, 404, true);
         logsManager.LogInstructions(mirrorUIManager.GetInstructions());
@@ -192,18 +193,7 @@ public class ExperimentManager : MonoBehaviour
         else
             Debug.Log("Too early!");
 
-        //Debug.Log(currentCondition);
-        //make it impossible to select for 0.5 seconds after selection
-        switch (currentCondition)
-        {
-            case "Touchscreen":
-                touchscreenMenu.SetButtonsInteractability(false);
-                break;
-            default:
-                Debug.LogError("Condition not found");
-                break;
-        }
-        Invoke("enableSelection", interSelectionPauseDuration);
+        DeactivateButtonsForDuration(interSelectionPauseDuration);
     }
 
     public void SelectItemVoiceCondition(string item)
@@ -234,12 +224,34 @@ public class ExperimentManager : MonoBehaviour
         else Debug.Log("WARNING: Before providing input, please select a condition.");
     }
 
+    private void DeactivateButtonsForDuration(float pauseDuration)
+    {
+        //Debug.Log(currentCondition);
+        //make it impossible to select for 0.5 seconds after selection
+        switch (currentCondition)
+        {
+            case "Touchscreen":
+                touchscreenMenu.SetButtonsInteractability(false);
+                break;
+            case "Controller":
+                controllerManager.SetButtonsInteractability(false);
+                break;
+            default:
+                Debug.LogError("Condition not found");
+                break;
+        }
+        Invoke("enableSelection", pauseDuration);
+    }
+
     public void enableSelection()
     {
         switch (currentCondition)
         {
             case "Touchscreen":
                 touchscreenMenu.SetButtonsInteractability(true);
+                break;
+            case "Controller":
+                controllerManager.SetButtonsInteractability(true);
                 break;
             default:
                 Debug.LogError("Condition not found");

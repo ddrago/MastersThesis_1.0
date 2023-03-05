@@ -5448,7 +5448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructionMultiplicationNumber: 4
-  interSelectionPauseDuration: 1
+  interSelectionPauseDuration: 0.7
   logsManager: {fileID: 887146387009144228}
   instructionGiver: {fileID: 4225755098981366590}
   mirrorUIManager: {fileID: 4225755098943772899}

@@ -248,4 +248,10 @@ public class ControllerManager : MonoBehaviour
         }
     }
 
+    internal void SetButtonsInteractability(bool canSelect)
+    {
+        GameObject[] items = GameObject.FindGameObjectsWithTag("ControllerMenuSelectableItems");
+        foreach (GameObject i in items)
+            i.GetComponent<Button>().interactable = canSelect;
+    }
 }
