@@ -24,7 +24,7 @@ public class LogsManager : MonoBehaviour
     // Called before Start
     private void Awake()
     {
-        InitLogging();
+        //InitLogging();
     }
 
     // Start is called before the first frame update
@@ -41,7 +41,7 @@ public class LogsManager : MonoBehaviour
     public void InitLogging()
     {
         // Log the browing and selection data
-        filename = Application.persistentDataPath + "/" + participantNumber + "_" + baseFileName;
+        filename = Application.persistentDataPath + "/" + participantNumber + "_" + baseFileName + "_" + DateTime.Now.Month.ToString() + "." + DateTime.Now.Day.ToString() + "." + DateTime.Now.Hour.ToString() + "." + DateTime.Now.Minute.ToString() + "." + DateTime.Now.Second.ToString();
         
         Debug.Log(filename);
 
@@ -51,7 +51,7 @@ public class LogsManager : MonoBehaviour
         });
 
         // Log the gaze path directional data
-        tiltPathFilename = Application.persistentDataPath + "/" + participantNumber + "_" + baseTiltPathFilename;
+        tiltPathFilename = Application.persistentDataPath + "/" + participantNumber + "_" + baseTiltPathFilename + "_" + DateTime.Now.Month.ToString() + "." + DateTime.Now.Day.ToString() + "." + DateTime.Now.Hour.ToString() + "." + DateTime.Now.Minute.ToString() + "." + DateTime.Now.Second.ToString();
         System.IO.File.WriteAllLines(tiltPathFilename, new string[] {
             "Time,TimeMS,TiltX,TiltY,TiltZ"
         });
@@ -66,6 +66,7 @@ public class LogsManager : MonoBehaviour
 
     public void LogTilt(Vector3 tilt)
     {
+        if (tiltPathFilename == null) return;
         System.IO.File.AppendAllLines(tiltPathFilename, new string[] {
             DateTime.Now.ToString() + "," + (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() + "," + tilt.x + "," + tilt.y + "," + tilt.z
         });

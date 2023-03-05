@@ -10,6 +10,7 @@ public class ExperimentManager : MonoBehaviour
     [Header("Experiment variables")]
     public int instructionMultiplicationNumber = 3;
     public float interSelectionPauseDuration = 0.5f;
+    private int participantNumber;
     private bool canSelect = true;
 
     [Header("GameObject Elements")]
@@ -31,6 +32,7 @@ public class ExperimentManager : MonoBehaviour
     public GameObject TouchscreenMenu;
     public GameObject ControllerMenu;
     public GameObject BaselineMenu;
+    public Text ParticipantNumberInputField;
 
     private static List<string> instructions_to_give = new List<string>(new string[] { "Music", "Calls", "Maps", "News", "Weather", "Terrain" });
     private static List<int> index_instructions_to_give = new List<int>(new int[] { 0, 1, 2, 3, 4, 5 });
@@ -45,6 +47,8 @@ public class ExperimentManager : MonoBehaviour
 
     public void StartExperiment()
     {
+        logsManager.participantNumber = participantNumber;
+        logsManager.InitLogging();
         instructionGiver.text = "Loading...";
         logsManager.LogOnCSV("[START EXPERIMENT]", "N/A", "N/A", 404, 404, true);
 
@@ -251,5 +255,11 @@ public class ExperimentManager : MonoBehaviour
     public List<string> GetCopyOfInstructionNames()
     {
         return new List<string>(instructions_to_give);
+    }
+
+    public void UpdateParticipantNumber()
+    {
+        if(!int.TryParse(ParticipantNumberInputField.text, out participantNumber))
+            Debug.LogError("ERROR: Participant Number given is not an integer!");
     }
 }
