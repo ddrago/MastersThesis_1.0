@@ -18,12 +18,14 @@ public class MirrorUIManager : NetworkBehaviour
     public Button VoiceExperimentButton;
     public Button TouchscreenExperimentButton;
     public Button ControllerExperimentButton;
+    public Button GestureExperimentButton;
     public Button BaselineExperimentButton;
 
     [Header("Back Buttons")]
     public Button VoiceBackButton;
     public Button TouchscreenBackButton;
     public Button ControllerBackButton;
+    public Button GestureBackButton;
     public Button BaselineBackButton;
 
     [Header("Touchscreen Menu objects")]
@@ -110,6 +112,18 @@ public class MirrorUIManager : NetworkBehaviour
         ControllerExperimentButton.onClick.Invoke();
     }
 
+    //--GESTURE BUTTON--
+    public void OnGestureExperiment()
+    {
+        CmdPressGestureExperimentButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressGestureExperimentButton()
+    {
+        GestureExperimentButton.onClick.Invoke();
+    }
+
     //--Baseline BUTTON--
     public void OnBaselineExperiment()
     {
@@ -156,6 +170,18 @@ public class MirrorUIManager : NetworkBehaviour
     void CmdPressControllerBackButton()
     {
         ControllerBackButton.onClick.Invoke();
+    }
+
+    //--GESTURE BACK BUTTON--
+    public void OnGestureBack()
+    {
+        CmdPressGestureBackButton();
+    }
+
+    [Command(requiresAuthority = false)]
+    void CmdPressGestureBackButton()
+    {
+        GestureBackButton.onClick.Invoke();
     }
 
     //--Baseline BACK BUTTON--
